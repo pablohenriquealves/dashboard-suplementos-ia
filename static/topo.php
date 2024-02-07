@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
+          <i class="hamburger align-self-center ms-2"></i>
         </a>
 
 				<div class="navbar-collapse collapse">

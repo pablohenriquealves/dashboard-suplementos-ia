@@ -1,3 +1,7 @@
+<head>
+	<?php include 'header.php'?>
+
+</head>
 
 	<nav id="sidebar" class="sidebar js-sidebar">
 		<!--bg-danger altera cor da sidebar na div abaixo-->

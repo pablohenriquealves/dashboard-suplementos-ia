@@ -1,9 +1,16 @@
-.bg-teal-400 {
+#bgteal400 {
     background-color: #009688;
     color: #fff;
-
 }
 
-.bg-teal-400 {
-    color: #009688;
+.sidebar-link, .sidebar-item {
+    background-color: #009688 #222e3c;
+}
+
+
+#pro {
+    position: fixed;
+    width: 14%;
+        bottom: 5px; /* Define a distância de 5 pixels do fundo */
+        left: 0; /* Para manter a div na lateral esquerda */
 }

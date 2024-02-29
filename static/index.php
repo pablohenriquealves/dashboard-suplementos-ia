@@ -22,6 +22,7 @@
     <?php include 'footer.php' ?>
 				
 </footer>
+
 		</div>
 	</div>
 

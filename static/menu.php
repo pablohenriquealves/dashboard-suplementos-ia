@@ -34,7 +34,11 @@
 	              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Fornecedor</span>
 	            </a>
 						</li>
-
+						
+						<li class="sidebar-item">
+<a class="sidebar-link bg-danger" href="pedidos.php">
+<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Pedidos</span>
+</a>
 					</ul>
 					</div>
 	

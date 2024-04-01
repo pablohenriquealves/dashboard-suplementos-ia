@@ -101,7 +101,9 @@
 								id="complemento"
 								placeholder="Complemento"/>
 							</div>
+							
 						</div>
+						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
 				</form>
 			</main>

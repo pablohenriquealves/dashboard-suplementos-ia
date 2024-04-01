@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 02-Abr-2024 às 00:32
+-- Tempo de geração: 02-Abr-2024 às 01:48
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -32,7 +32,7 @@ CREATE TABLE `cliente` (
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefone` varchar(11) NOT NULL,
-  `cpf` int(11) NOT NULL,
+  `cpfcnpj` int(11) NOT NULL,
   `cep` int(8) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
   `numero` int(10) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `fornecedor` (
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefone` int(11) NOT NULL,
-  `cpf` int(14) NOT NULL,
+  `cpfcnpj` int(14) NOT NULL,
   `cep` int(8) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
   `numero` int(10) NOT NULL,
@@ -66,14 +66,19 @@ CREATE TABLE `fornecedor` (
 CREATE TABLE `produto` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefone` varchar(11) NOT NULL,
-  `cpf` int(14) NOT NULL,
-  `cep` int(8) NOT NULL,
-  `logradouro` varchar(45) NOT NULL,
-  `numero` int(10) NOT NULL,
-  `complemento` varchar(45) NOT NULL
+  `descricao` varchar(100) NOT NULL,
+  `estoque` int(11) NOT NULL,
+  `fornecedor` varchar(45) NOT NULL,
+  `cnpjfornecedor` int(14) NOT NULL,
+  `preco` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`id`, `nome`, `descricao`, `estoque`, `fornecedor`, `cnpjfornecedor`, `preco`) VALUES
+(1, 'Whey', 'Whey protein do soro do leite', 100, 'Growth', 2147483647, 150);
 
 --
 -- Índices para tabelas despejadas
@@ -92,6 +97,12 @@ ALTER TABLE `fornecedor`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -106,6 +117,12 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `fornecedor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

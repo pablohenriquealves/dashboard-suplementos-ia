@@ -13,10 +13,10 @@
 			<?php include 'topo.php' ?>
 
 			<main class="content">
-				<form action="cadastrocliente.php" method="post">
+				<form action="cadastrofornecedor.php" method="post">
 					<div class="container-fluid p-0">
 
-						<h1 class="h3 mb-3">Cadastro do Cliente</h1>
+						<h1 class="h3 mb-3">Cadastro de Fornecedor</h1>
 
 						<div class="row">
 							<div class="mb-3 col-6">
@@ -36,7 +36,7 @@
 								class="form-control"
 								name="email"
 								id="email"
-								placeholder="cliente@mail.com.br"/>
+								placeholder="fornecedor@mail.com.br"/>
 							</div>
 						</div>
 						<div class="row">
@@ -102,6 +102,7 @@
 								placeholder="Complemento"/>
 							</div>
 						</div>
+						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
 				</form>
 			</main>

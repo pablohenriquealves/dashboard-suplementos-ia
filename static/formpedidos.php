@@ -21,7 +21,7 @@
     <div class="col-md-6">
         <!-- Subtitulo 01: Fazer Novo Pedido -->
         <h3>Novo Pedido</h3>
-        <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <form method="post" action="cadastropedidos.php">
             <div class="form-group">
                 <label for="nome_cliente">Nome do Cliente:</label>
                 <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" required>

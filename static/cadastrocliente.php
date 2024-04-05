@@ -9,12 +9,12 @@ $cep = $_POST['cep'];
 $logradouro = $_POST['logradouro'];
 $numero = $_POST['numero'];
 $complemento = $_POST['complemento'];
+$arquivo = $_FILES['imagem'];
 
 require('conexao.php');
 
 
-$sql = "INSERT INTO cliente (nome, email, 'telefone' cpfcnpj, cep, logradouro, numero, complemento)
- VALUES ('$nome','$email', '$telefone' '$cpfcnpj', '$cep', '$logradouro', '$numero', '$complemento')";
+$sql = "INSERT INTO cliente (nome, email, telefone, cpfcnpj, cep, logradouro, numero, complemento, arquivo) VALUES ('$nome','$email', '$telefone', '$cpfcnpj', '$cep', '$logradouro', '$numero', '$complemento', '$arquivo')";
 
     if(mysqli_query($conexao,$sql)){
         echo "Registro inserido com sucesso";
@@ -24,7 +24,7 @@ $sql = "INSERT INTO cliente (nome, email, 'telefone' cpfcnpj, cep, logradouro, n
 
     mysqli_close($conexao);
 
-    header("location:formproduto.php");
+    header("location:formcliente.php");
 
 
 

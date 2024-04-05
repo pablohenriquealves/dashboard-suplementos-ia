@@ -13,8 +13,8 @@ $complemento = $_POST['complemento'];
 require('conexao.php');
 
 
-$sql = "INSERT INTO fornecedor (nome, email, 'telefone' cpfcnpj, cep, logradouro, numero, complemento)
- VALUES ('$nome','$email', '$telefone' '$cpfcnpj', '$cep', '$logradouro', '$numero', '$complemento')";
+$sql = "INSERT INTO fornecedor (nome, email, telefone, cpfcnpj, cep, logradouro, numero, complemento)
+ VALUES ('$nome','$email', '$telefone', '$cpfcnpj', '$cep', '$logradouro', '$numero', '$complemento')";
 
     if(mysqli_query($conexao,$sql)){
         echo "Registro inserido com sucesso";
@@ -24,7 +24,7 @@ $sql = "INSERT INTO fornecedor (nome, email, 'telefone' cpfcnpj, cep, logradouro
 
     mysqli_close($conexao);
 
-    header("location:formproduto.php");
+    header("location:formfornecedor.php");
 
 
 

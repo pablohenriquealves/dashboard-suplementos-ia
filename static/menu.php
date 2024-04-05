@@ -36,7 +36,7 @@
 						</li>
 						
 						<li class="sidebar-item">
-<a class="sidebar-link bg-danger" href="pedidos.php">
+<a class="sidebar-link bg-danger" href="formpedidos.php">
 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Pedidos</span>
 </a>
 					</ul>

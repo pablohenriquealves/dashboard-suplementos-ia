@@ -13,7 +13,7 @@
 			<?php include 'topo.php' ?>
 
 			<main class="content">
-				<form action="cadastrocliente.php" method="post">
+				<form action="cadastrocliente.php" method="post"  enctype="multipart/form-data">
 					<div class="container-fluid p-0">
 
 						<h1 class="h3 mb-3">Cadastro do Cliente</h1>
@@ -141,7 +141,7 @@
 
 							while ($dados = mysqli_fetch_array($busca)){
 								$id = $dados['id'];
-								$imagem = $dados['imagem'];
+								$imagem = $dados['arquivo'];
 								$nome = $dados['nome'];
 								$email = $dados['email'];
 								$telefone = $dados['telefone'];
@@ -151,7 +151,7 @@
 							?>
 
 								<tr class="text-center">
-								<td><img src="imagens/<?php echo $imagem ?>" width="100px" height="100%" class="rounded-circle"></td>
+								<td><img src="<?php echo $imagem ?>" width="100px" height="100%" class="rounded-circle"></td>
 									<td><?php echo $nome ?></td>
 									<td><?php echo $email ?></td>
 									<td><?php echo $telefone ?></td>

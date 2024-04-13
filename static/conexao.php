@@ -1,9 +1,9 @@
 <?php
-$conexao = mysqli_connect("localhost", "root", "", "suplementosia", "3307" );
+$conexao = mysqli_connect("localhost", "root", "", "suplementosia", "3307");
 
     if(!$conexao){
         die('Não foi possível conectar ao banco de dados'.mysqli_connect_error());
     }
-echo "Conexão bem sucedida";
+// echo "Conexão bem sucedida";
 
 ?>

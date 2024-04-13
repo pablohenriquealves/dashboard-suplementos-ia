@@ -13,7 +13,7 @@
 			<?php include 'topo.php' ?>
 
 			<main class="content">
-				<form action="cadastroproduto.php" method="post">
+				<form action="cadastroproduto.php" method="post"  enctype="multipart/form-data">
 					<div class="container">
 
 						<h1 class="h3 mb-3">Cadastro do Produto</h1>
@@ -32,12 +32,12 @@
 						<div class="row">
 							<div class="mb-3 col-6">
 								<label for="estoque" class="form-label">Quantidade em Estoque</label>
-								<input type="number" class="form-control" name="estoque" id="estoque"placeholder="Quantidade em estoque">
+								<input type="Integer" class="form-control" name="estoque" id="estoque"placeholder="Quantidade em estoque">
 							</div>
 							
 							<div class="mb-3 col-6">
 								<label for="cnpjfornecedor" class="form-label">CNPJ do Fornecedor</label>
-								<input type="cep" class="form-control" name="cnpjfornecedor" id="cnpjfornecedor" placeholder="Digite o CNPJ do fornecedor" />
+								<input type="text" class="form-control" name="cnpjfornecedor" id="cnpjfornecedor" placeholder="Digite o CNPJ do fornecedor" />
 							</div>
 					
 						</div>
@@ -45,12 +45,12 @@
 						<div class="row">
 						<div class="mb-3 col-6">
 								<label for="descricao" class="form-label">Descrição</label>
-								<input type="descricao" class="form-control" name="descricao" id="descricao" placeholder="Descrição do produto">
+								<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição do produto">
 							</div>
 						   
 							<div class="mb-3 col-6">
 								<label for="preco" class="form-label">Preço</label>
-								<input type="text" class="form-control" name="preco" id="preco" placeholder="Digite o preco do produto">
+								<input type="Integer" class="form-control" name="preco" id="preco" placeholder="Digite o preco do produto">
 							</div>
 											
 						</div>
@@ -61,7 +61,7 @@
 								class="form-control"
 								name="imagem"
 								id="imagem"
-								placeholder="Insira sua imagem"/>
+								placeholder="Insira a imagem do produto"/>
 						</div>
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
@@ -77,6 +77,7 @@
 						class="table table-bordered"
 					>
 						<thead>
+							<tr><th colspan="7" style="text-align: center;">Produtos cadastrados</th></tr>
 							<tr class="text-center">
 							<th scope="col">Foto</th>
 								<th scope="col">ID do Produto</th>
@@ -95,7 +96,7 @@
 
 							while ($dados = mysqli_fetch_array($busca)){
 								$idprodutos = $dados['id'];
-								$imagem = $dados['imagem'];
+								$imagem = $dados['arquivo'];
 								$produto = $dados['nome'];
 								$preco = $dados['preco'];
 								$estoque = $dados['estoque'];
@@ -104,7 +105,7 @@
 							?>
 
 								<tr class="text-center">
-								<td><img src="imagens/<?php echo $imagem ?>" width="100px" height="100%" class="rounded-circle"></td>
+								<td><img src="<?php echo $imagem ?>" width="100px" height="100%"></td>
 									<td><?php echo $idprodutos ?></td>
 									<td><?php echo $produto ?></td>
 									<td><?php echo $preco ?></td>

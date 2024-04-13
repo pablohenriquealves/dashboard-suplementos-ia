@@ -123,6 +123,7 @@
 				>
 					<table class="table table-bordered">
 						<thead>
+							<tr><th colspan="7" style="text-align: center;">Clientes cadastrados</th></tr>
 							<tr class="text-center">
 							<th scope="col">Foto</th>
 								<th scope="col">Nome do cliente</th>

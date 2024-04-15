@@ -3,19 +3,20 @@ $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
 $cpf = $_POST['cpf'];
+$id = $_POST['id'];
 
 require('conexao.php');
 
 // Verifica se todos os campos foram preenchidos
 if (!empty($nome) && !empty($email) && !empty($telefone) && !empty($cpf)) {
     // Prepara a query SQL para inserir os dados na tabela de vendedores
-    $sql = "INSERT INTO vendedor (nome, email, telefone, cpf) VALUES ('$nome', '$email', '$telefone', '$cpf')";
+    $sql = "UPDATE vendedor SET nome='$nome', email='$email', telefone='$telefone', cpf='$cpf' WHERE id='$id'";
 
     // Executa a query
     if (mysqli_query($conexao, $sql)) {
-        echo "Vendedor cadastrado com sucesso";
+        echo "Vendedor alterado com sucesso";
     } else {
-        echo "Erro ao cadastrar o vendedor: " . mysqli_error($conexao);
+        echo "Erro ao alterar cadastro do vendedor: " . mysqli_error($conexao);
     }
 } else {
     echo "Todos os campos são obrigatórios.";

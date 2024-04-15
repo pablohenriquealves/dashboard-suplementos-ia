@@ -189,7 +189,7 @@
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
 								 									Editar produto 
-																	 <?php echo $idprodutos ?>
+																	 <?php echo $id ?>
 																</h5>
 																<button
 																	type="button"

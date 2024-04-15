@@ -51,13 +51,13 @@
 							</div>
 				
 							<div class="mb-3 col-4">
-								<label for="cpfcnpj" class="form-label">CPF/CNPJ</label>
+								<label for="cpfcnpj" class="form-label">CNPJ</label>
 								<input 
 								type="cpfcnpj" 
 								class="form-control"
 								name="cpfcnpj"
 								id="cpfcnpj"
-								placeholder="CPF do cliente"/>
+								placeholder="CNPJ do fornecedor"/>
 							</div>
 
 							<div class="mb-3 col-4">
@@ -117,6 +117,7 @@
 						class="table table-bordered"
 					>
 						<thead>
+						<tr><th colspan="7" style="text-align: center;">Fornecedores cadastrados</th></tr>
 							<tr class="text-center">
 								<th scope="col">Nome</th>
 								<th scope="col">Email</th>
@@ -178,7 +179,7 @@
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
 																	Editar produto 
-																	 <?php echo $idprodutos ?>
+																	 <?php echo $id ?>
 																</h5>
 																<button
 																	type="button"

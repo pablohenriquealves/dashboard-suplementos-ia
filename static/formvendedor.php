@@ -37,7 +37,7 @@
                                     class="form-control"
                                     name="email"
                                     id="email"
-                                    placeholder="cliente@mail.com.br" required/>
+                                    placeholder="vendedor@mail.com.br" required/>
                             </div>
                         </div>
                         <div class="row">
@@ -112,7 +112,7 @@
 													data-bs-target="#modaleditar"
 													data-id="<?php echo $id ?>"
 												>
-												<i class="fa-solid fa-file-pen"></i>												</button>
+												<i class="fa-solid fa-file-pen"></i></button>
 												
 												<!-- Modal Body -->
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -178,7 +178,7 @@
 						<div class="mb-3 col-12">
 							<label for="telefone" class="form-label">Telefone</label>
 							<input
-								type="int"
+								type="text"
 								class="form-control"
 								name="telefone"
 								id="telefone"
@@ -212,18 +212,18 @@
 	</div>
 	</div>
 												
-
-
-												<!-- Modal trigger button -->
-												<button
-													type="button"
-													class="btn btn-danger btn-lg"
-													data-bs-toggle="modal"
-													data-bs-target="#modalexcluir"
-												>
-												<i class="fa-solid fa-trash-can"></i></button>
-												<!-- Modal Body -->
-												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+											
+	<!-- Modal trigger button -->
+	<button
+	type="button"
+	class="btn btn-danger btn-lg"
+	data-bs-toggle="modal"
+	data-bs-target="#modalexcluir"
+	>
+	<i class="fa-solid fa-trash-can"></i></button>
+	<!-- Modal Body -->
+	<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+	<form action="excluirVendedor.php" method="POST">
 												<div
 													class="modal fade"
 													id="modalexcluir"
@@ -257,21 +257,46 @@
 																	data-bs-dismiss="modal">
 																	Voltar
 																</button>
-																<button type="button" class="btn btn-danger">Excluir</button>
+																<input type="hidden" name="id" value="<?php echo $id; ?>">
+																<button type="submit" class="btn btn-danger">Excluir</button>
 															</div>
 														</div>
 													</div>
-												</div>
-												
+												</div> 
+											</form>
+													
 												<!-- Optional: Place to the bottom of scripts -->
+												
 												<script>
 													const myModal = new bootstrap.Modal(
 														document.getElementById("modalId"),
 														options,
 													);
-												</script>
-												
-												</td>
+													
+													document.addEventListener('DOMContentLoaded', function() {
+														// Formata o CPF
+														const cpfInput = document.getElementById('cpf');
+														cpfInput.addEventListener('input', function (event) {
+            const cpf = event.target.value.replace(/\D/g, '');
+            let cpfFormatado = '';
+            if (cpf.length > 0) {
+				cpfFormatado = cpf.substring(0, 3);
+                if (cpf.length > 3) {
+					cpfFormatado += '.' + cpf.substring(3, 6);
+                    if (cpf.length > 6) {
+						cpfFormatado += '.' + cpf.substring(6, 9);
+                        if (cpf.length > 9) {
+							cpfFormatado += '-' + cpf.substring(9, 11);
+                        }
+                    }
+                }
+            }
+            event.target.value = cpfFormatado;
+        });
+    });
+	
+	</script>
+	</td>
 								</tr>
 
 							<?php } ?>

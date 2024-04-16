@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 02-Abr-2024 às 01:48
+-- Tempo de geração: 17-Abr-2024 às 01:23
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -32,11 +32,12 @@ CREATE TABLE `cliente` (
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefone` varchar(11) NOT NULL,
-  `cpfcnpj` int(11) NOT NULL,
-  `cep` int(8) NOT NULL,
+  `cpfcnpj` char(11) NOT NULL,
+  `cep` char(8) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
-  `numero` int(10) NOT NULL,
-  `complemento` int(45) NOT NULL
+  `numero` char(10) NOT NULL,
+  `complemento` varchar(45) NOT NULL,
+  `arquivo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -49,13 +50,29 @@ CREATE TABLE `fornecedor` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `telefone` int(11) NOT NULL,
-  `cpfcnpj` int(14) NOT NULL,
-  `cep` int(8) NOT NULL,
+  `telefone` char(11) NOT NULL,
+  `cpfcnpj` char(14) NOT NULL,
+  `cep` char(8) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
-  `numero` int(10) NOT NULL,
+  `numero` char(10) NOT NULL,
   `complemento` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `logradouro`, `numero`, `complemento`) VALUES
+(3, 'Fornecedor A', 'fornecedorA@example.com', '(11) 1 2345', '12.345.678/000', '12345-67', 'Rua das Flores', '123', 'Sala 101'),
+(4, 'Distribuidora B Ltda.', 'distribuidoraB@example.com', '(21) 9 8765', '98.765.432/000', '54321-87', 'Avenida dos Sonhos', '456', '-'),
+(5, 'Fornecedores Cia', 'fornecedores@example.com', '(31) 5 5554', '', '32165-78', 'Travessa das Pedras', '789', '-'),
+(6, 'Mega Suprimentos', 'mega@example.com', '(41) 3 3332', '33.222.111/000', '98765-43', 'Rua dos Abacaxis', '1010', '-'),
+(7, 'Importadora XYZ', 'importadoraXYZ@example.com', '(51) 7 7778', '77.888.999/000', '56789-01', 'Alameda das Estrelas', '222', '-'),
+(8, 'Fornecedor de Materiais ABC', 'materiaisABC@example.com', '(61) 6 6667', '66.777.888/000', '90123-45', 'Praça Central', '777', ''),
+(9, 'Comércio e Exportação Global', 'global@example.com', '(71) 4 4443', '44.333.222/000', '34567-89', 'Avenida dos Cometas', '1234', '-'),
+(10, 'Suprimentos do Brasil Ltda.', 'brasil@example.com', '(81) 9 9998', '99.888.777/000', '45678-90', 'Travessa dos Girassóis', '567', '-'),
+(11, 'Distribuidora de Eletrônicos Tech', 'tech@example.com', '(91) 7 7776', '77.666.555/000', '78901-23', 'Rua das Tecnologias', '888', '-'),
+(12, 'Indústria de Componentes Ltda', 'industria@example.com', '(92) 8 8889', '88.999.000/000', '23456-78', 'Avenida das Indústrias', '999', '-');
 
 -- --------------------------------------------------------
 
@@ -70,15 +87,10 @@ CREATE TABLE `produto` (
   `estoque` int(11) NOT NULL,
   `fornecedor` varchar(45) NOT NULL,
   `cnpjfornecedor` int(14) NOT NULL,
-  `preco` float NOT NULL
+  `preco` float NOT NULL,
+  `categoria` varchar(45) NOT NULL,
+  `arquivo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `produto`
---
-
-INSERT INTO `produto` (`id`, `nome`, `descricao`, `estoque`, `fornecedor`, `cnpjfornecedor`, `preco`) VALUES
-(1, 'Whey', 'Whey protein do soro do leite', 100, 'Growth', 2147483647, 150);
 
 --
 -- Índices para tabelas despejadas
@@ -110,19 +122,19 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

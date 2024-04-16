@@ -100,26 +100,60 @@
 						</div>
 
 						<div class="col-xl-6 col-xxl-7">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
+    <div class="card flex-fill w-100">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Movimentação Recente</h5>
+        </div>
 
-									<h5 class="card-title mb-0">Movimentação Recente</h5>
-								</div>
-								<div class="card-body py-3">
-									<div class="chart chart-sm">
-										<canvas id="chartjs-dashboard-line"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+	<div class="card-body py-3">
+            <div class="main">
+                <div class="table-responsive overflow-auto"> <!-- Aqui adicionamos a classe overflow-auto -->
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">Nome</th>
+                                <th scope="col">Pedido</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Obs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php include 'conexao.php';
+
+                            $sql = "SELECT * FROM pedidos";
+                            $busca = mysqli_query($conexao, $sql);
+
+                            while ($dados = mysqli_fetch_array($busca)){
+                                $id = $dados['id'];
+                                $nome = $dados['nome'];
+                                $produto = $dados['produto'];
+                                $obs = $dados['observacoes'];
+                                $valor = $dados['valor'];
+                            ?>
+                                <tr class="text-center">
+                                    <td><?php echo $nome ?></td>
+                                    <td><?php echo $id ?></td>
+                                    <td><?php echo $valor ?></td>                            
+                                    <td><?php echo $obs ?></td>                            
+                                </tr>
+								
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>	
+						
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+	</div>	
+</div>
 
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Últimos Projetos</h5>
+									<h5 class="card-title mb-0">Últimos produtos cadastrados</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>

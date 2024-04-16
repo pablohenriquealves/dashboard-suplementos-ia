@@ -119,8 +119,8 @@
 						<thead>
 						<tr><th colspan="7" style="text-align: center;">Fornecedores cadastrados</th></tr>
 							<tr class="text-center">
-								<th scope="col">Nome</th>
-								<th scope="col">Email</th>
+								<th class="col-2" scope="col">Nome</th>
+								<th  class="col-2" colspanscope="col">Email</th>
 								<th scope="col">Telefone</th>
 								<th scope="col">CNPJ</th>
 								<th scope="col">CEP</th>

@@ -2,14 +2,14 @@
 <?php 
 require('conexao.php');
 
-$nome = $_POST['nomeproduto'];
+$nomeproduto = $_POST['nomeproduto'];
 $descricao = $_POST['descricao'];
 $estoque = $_POST['estoque'];
 $cnpjfornecedor = $_POST['cnpjfornecedor'];
 $preco = $_POST['preco'];
 $categoria = $_POST['categoria'];
 $arquivo = $_FILES['imagem'];
-
+$id = $_POST['id'];
 
 
 if($arquivo !== null) {
@@ -20,7 +20,7 @@ if($arquivo !== null) {
         $caminho_arquivo = "img/produtos/".$nome_arquivo;
         move_uploaded_file($arquivo['tmp_name'], $caminho_arquivo);
 
-        $sql = "INSERT INTO produto (nome, descricao, estoque, cnpjfornecedor, preco, categoria, arquivo) VALUES ('$nome','$descricao', '$estoque', '$cnpjfornecedor', '$preco', '$categoria', '$caminho_arquivo')";
+        $sql = "INSERT INTO produto (nomeproduto, descricao, estoque, cnpjfornecedor, preco, categoria, arquivo) VALUES ('$nomeproduto','$descricao', '$estoque', '$cnpjfornecedor', '$preco', '$categoria', '$caminho_arquivo')";
 
 
         if(mysqli_query($conexao,$sql)){

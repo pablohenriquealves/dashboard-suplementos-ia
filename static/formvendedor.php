@@ -21,7 +21,7 @@
                         <!-- Formulário de cadastro -->
                         <div class="row">
                             <div class="mb-3 col-6">
-                                <label for="nome" class="form-label">Nome completo:</label>
+                                <label for="nome" class="form-label">Nome Completo</label>
                                 <input 
                                     type="text" 
                                     class="form-control"
@@ -58,12 +58,12 @@
                                     class="form-control"
                                     name="cpf"
                                     id="cpf"
-                                    placeholder="CPF do vendedor" required/>
+                                    placeholder="CPF do Vendedor" required/>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
-                </form>
+                </form><br>
 
                 
 			<div class="main">
@@ -74,7 +74,7 @@
 						class="table table-bordered"
 					>
 						<thead>
-                        <tr><th colspan="7" style="text-align: center;">Vendedores cadastrados</th></tr>
+                        <tr><th colspan="7" style="text-align: center;">Vendedores Cadastrados</th></tr>
 							<tr class="text-center">
 								<th scope="col">Nome</th>
 								<th scope="col">Email</th>

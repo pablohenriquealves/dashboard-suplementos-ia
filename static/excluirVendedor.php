@@ -4,7 +4,6 @@ $email = $_POST['email'];
 $telefone = $_POST['telefone'];
 $cpf = $_POST['cpf'];
 $id = $_POST['id'];
-
 require('conexao.php');
 
 

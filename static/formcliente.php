@@ -167,7 +167,7 @@
 													data-bs-target="#modaleditar"
 													data-id="<?php echo $id ?>"
 												>
-												<i class="fa-solid fa-file-pen"></i>												</button>
+												<i class="fa-solid fa-file-pen"></i></button>
 												
 												<!-- Modal Body -->
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -188,8 +188,8 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-								 									Editar produto 
-																	 <?php echo $id ?>
+																	Editar cadastro vendedor 
+																	 <?php echo $nome ?>
 																</h5>
 																<button
 																	type="button"
@@ -199,30 +199,31 @@
 															</div>
 
 															<div class="modal-body">
-																<form action="atualizarproduto.php" method="POST">
+																<form action="atualizarvendedor.php" method="POST">
+                                                                    
+																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 																<div class="container-fluid p-0">
 
-					<h3 class="h3 mb-3">Dados do produto</h3>
+					<h3 class="h3 mb-3">Dados do vendedor</h3>
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="produto" class="form-label">Nome</label>
+							<label for="nome" class="form-label">Nome</label>
 							<input
 								type="text"
 								class="form-control"
-								name="produto"
-								id="produto"
-								placeholder="Digite o nome do produto"/>
+								name="nome"
+								id="nome"
+								placeholder="Digite o nome do vendedor"/>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="descricao" class="form-label">Descrição</label>
+							<label for="email" class="form-label">E-mail</label>
 							<input
-								type="text"
+								type="email"
 								class="form-control"
-								name="descricao"
-								id="descricao"
-								placeholder="Digite a descrição do produto"/>
-						
+								name="email"
+								id="email"
+								placeholder="Digite o E-mail"/>
 						</div>
 						
 						
@@ -230,100 +231,24 @@
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="preco" class="form-label">Preço</label>
-							<input
-								type="int"
-								class="form-control"
-								name="preco"
-								id="preco"
-								placeholder="Digite o preço do produto"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="categoria" class="form-label">Categoria</label>
+							<label for="telefone" class="form-label">Telefone</label>
 							<input
 								type="text"
 								class="form-control"
-								name="categoria"
-								id="categoria"
-								placeholder="Digite a categoria"
-							/>
+								name="telefone"
+								id="telefone"
+								placeholder="Digite o telefone"/>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="estoque" class="form-label">Estoque</label>
+							<label for="cpf" class="form-label">CPF</label>
 							<input
 								type="text"
 								class="form-control"
-								name="estoque"
-								id="estoque"
-								placeholder="Digite a "
-							/>
+								name="cpf"
+								id="cpf"
+								placeholder="Digite o CPF" required/>
 						</div>
-
-					<div class="row">
-						<div class="mb-3 col-12">
-							<label for="logradouro" class="form-label">Logradouro</label>
-							<input
-								type="text"
-								class="form-control"
-								name="logradouro"
-								id="logradouro"
-								placeholder="Insira o logradouro"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="numero" class="form-label">Nº</label>
-							<input
-								type="text"
-								class="form-control"
-								name="numero"
-								id="numero"
-								placeholder="Insira o Nº"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="complemento" class="form-label">Complemento</label>
-							<input
-								type="text"
-								class="form-control"
-								name="complemento"
-								id="complemento"
-								placeholder="Insira o complemento"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="bairro" class="form-label">Bairro</label>
-							<input
-								type="text"
-								class="form-control"
-								name="bairro"
-								id="bairro"
-								placeholder="Insira o bairro"
-							/>
-						</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="mb-3 col-12">
-							<label for="cidade" class="form-label">Cidade</label>
-							<input
-								type="text"
-								class="form-control"
-								name="cidade"
-								id="cidade"
-								placeholder="Insira o logradouro"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="uf" class="form-label">Estado</label>
-							<input
-								type="text"
-								class="form-control"
-								name="uf"
-								id="uf"
-								placeholder="Insira o Estado"/>
-						</div>
+						
 						
 					</div>
 					<div class="modal-footer">
@@ -333,7 +258,7 @@
 						data-bs-dismiss="modal">
 						Voltar
 					</button>
-					<button type="button" class="btn btn-primary">Salvar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
 				</form>
 				</div>
 			</div>
@@ -342,19 +267,18 @@
 	</div>
 	</div>
 												
-
-
-												<!-- Modal trigger button -->
-												<button
-													type="button"
-													class="btn btn-danger btn-lg"
-													data-bs-toggle="modal"
-													data-bs-target="#modalexcluir"
-												>
-												<i class="fa-solid fa-trash-can"></i></button>
-												
-												<!-- Modal Body -->
-												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+											
+	<!-- Modal trigger button -->
+	<button
+	type="button"
+	class="btn btn-danger btn-lg"
+	data-bs-toggle="modal"
+	data-bs-target="#modalexcluir"
+	>
+	<i class="fa-solid fa-trash-can"></i></button>
+	<!-- Modal Body -->
+	<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+	<form action="excluirVendedor.php" method="POST">
 												<div
 													class="modal fade"
 													id="modalexcluir"
@@ -371,7 +295,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Excluir dados do cliente <?php echo $idclientes ?>
+																	Excluir dados do vendedor <?php echo $nome ?>
 																</h5>
 																<button
 																	type="button"
@@ -388,21 +312,46 @@
 																	data-bs-dismiss="modal">
 																	Voltar
 																</button>
-																<button type="button" class="btn btn-danger">Excluir</button>
+																<input type="hidden" name="id" value="<?php echo $id; ?>">
+																<button type="submit" class="btn btn-danger">Excluir</button>
 															</div>
 														</div>
 													</div>
-												</div>
-												
+												</div> 
+											</form>
+													
 												<!-- Optional: Place to the bottom of scripts -->
+												
 												<script>
 													const myModal = new bootstrap.Modal(
 														document.getElementById("modalId"),
 														options,
 													);
-												</script>
-												
-												</td>
+													
+													document.addEventListener('DOMContentLoaded', function() {
+														// Formata o CPF
+														const cpfInput = document.getElementById('cpf');
+														cpfInput.addEventListener('input', function (event) {
+            const cpf = event.target.value.replace(/\D/g, '');
+            let cpfFormatado = '';
+            if (cpf.length > 0) {
+				cpfFormatado = cpf.substring(0, 3);
+                if (cpf.length > 3) {
+					cpfFormatado += '.' + cpf.substring(3, 6);
+                    if (cpf.length > 6) {
+						cpfFormatado += '.' + cpf.substring(6, 9);
+                        if (cpf.length > 9) {
+							cpfFormatado += '-' + cpf.substring(9, 11);
+                        }
+                    }
+                }
+            }
+            event.target.value = cpfFormatado;
+        });
+    });
+	
+	</script>
+	</td>
 								</tr>
 
 							<?php } ?>

@@ -55,7 +55,7 @@
 											
 						</div>
 						<div class="mb-3 col-4">
-							<label for="imagem" class="form-label">Logo/Imagem pessoal</label>
+							<label for="imagem" class="form-label">Logo/Imagem Pessoal</label>
 							<input
 								type="file"
 								class="form-control"
@@ -77,7 +77,7 @@
 						class="table table-bordered"
 					>
 						<thead>
-							<tr><th colspan="7" style="text-align: center;">Produtos cadastrados</th></tr>
+							<tr><th colspan="7" style="text-align: center;">Produtos Cadastrados</th></tr>
 							<tr class="text-center">
 							<th scope="col">Foto</th>
 								<th scope="col">ID do Produto</th>
@@ -85,7 +85,7 @@
 								<th scope="col">Preço</th>
 								<th scope="col">Estoque</th>
 								<th scope="col">Categoria</th>
-								<th scope="col">Ações</th>
+								<th scope="col">AÇÕES</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -95,7 +95,7 @@
 							$busca = mysqli_query($conexao, $sql);
 
 							while ($dados = mysqli_fetch_array($busca)){
-								$idprodutos = $dados['id'];
+								$id = $dados['id'];
 								$imagem = $dados['arquivo'];
 								$produto = $dados['nomeproduto'];
 								$preco = $dados['preco'];
@@ -106,7 +106,7 @@
 
 								<tr class="text-center">
 								<td><img src="<?php echo $imagem ?>" width="100px" height="100%"></td>
-									<td><?php echo $idprodutos ?></td>
+									<td><?php echo $id ?></td>
 									<td><?php echo $produto ?></td>
 									<td><?php echo $preco ?></td>
 									<td><?php echo $estoque ?></td>
@@ -118,9 +118,9 @@
 													class="btn btn-warning btn-lg"
 													data-bs-toggle="modal"
 													data-bs-target="#modaleditar"
-													data-id="<?php echo $idprodutos ?>"
+													data-id="<?php echo $id ?>"
 												>
-												<i class="fa-solid fa-file-pen"></i>												</button>
+												<i class="fa-solid fa-file-pen"></i></button>
 												
 												<!-- Modal Body -->
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -141,8 +141,8 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Editar produto 
-																	 <?php echo $idprodutos ?>
+																	Editar Cadastro do Produto 
+																	 <?php echo $nome ?>
 																</h5>
 																<button
 																	type="button"
@@ -152,30 +152,31 @@
 															</div>
 
 															<div class="modal-body">
-																<form action="atualizarproduto.php" method="POST">
+																<form action="atualizarProduto.php" method="POST">
+                                                                    
+																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 																<div class="container-fluid p-0">
 
-					<h3 class="h3 mb-3">Dados do produto</h3>
+					<h3 class="h3 mb-3">Dados do Produto</h3>
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="produto" class="form-label">Nome</label>
+						<label for="imagem" class="form-label">Logo/Imagem Pessoal</label>
 							<input
-								type="text"
+								type="file"
 								class="form-control"
-								name="produto"
-								id="produto"
-								placeholder="Digite o nome do produto"/>
+								name="imagem"
+								id="imagem"
+								placeholder="Insira a imagem do produto"/>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="descricao" class="form-label">Descrição</label>
+							<label for="email" class="form-label">Produto</label>
 							<input
 								type="text"
 								class="form-control"
-								name="descricao"
-								id="descricao"
-								placeholder="Digite a descrição do produto"/>
-						
+								name="nomeproduto"
+								id="nomeproduto"
+								placeholder="Digite nome do produto"/>
 						</div>
 						
 						
@@ -185,22 +186,11 @@
 						<div class="mb-3 col-12">
 							<label for="preco" class="form-label">Preço</label>
 							<input
-								type="int"
+								type="Integer"
 								class="form-control"
 								name="preco"
 								id="preco"
-								placeholder="Digite o preço do produto"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="categoria" class="form-label">Categoria</label>
-							<input
-								type="text"
-								class="form-control"
-								name="categoria"
-								id="categoria"
-								placeholder="Digite a categoria"
-							/>
+								placeholder="Digite o preço do produto"/>
 						</div>
 						<div class="mb-3 col-12">
 							<label for="estoque" class="form-label">Estoque</label>
@@ -209,74 +199,9 @@
 								class="form-control"
 								name="estoque"
 								id="estoque"
-								placeholder="Digite a "
-							/>
+								placeholder="Digite o estoque disponível" required/>
 						</div>
-
-					<div class="row">
-						<div class="mb-3 col-12">
-							<label for="logradouro" class="form-label">Logradouro</label>
-							<input
-								type="text"
-								class="form-control"
-								name="logradouro"
-								id="logradouro"
-								placeholder="Insira o logradouro"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="numero" class="form-label">Nº</label>
-							<input
-								type="text"
-								class="form-control"
-								name="numero"
-								id="numero"
-								placeholder="Insira o Nº"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="complemento" class="form-label">Complemento</label>
-							<input
-								type="text"
-								class="form-control"
-								name="complemento"
-								id="complemento"
-								placeholder="Insira o complemento"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="bairro" class="form-label">Bairro</label>
-							<input
-								type="text"
-								class="form-control"
-								name="bairro"
-								id="bairro"
-								placeholder="Insira o bairro"
-							/>
-						</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="mb-3 col-12">
-							<label for="cidade" class="form-label">Cidade</label>
-							<input
-								type="text"
-								class="form-control"
-								name="cidade"
-								id="cidade"
-								placeholder="Insira o logradouro"
-							/>
-						</div>
-						<div class="mb-3 col-12">
-							<label for="uf" class="form-label">Estado</label>
-							<input
-								type="text"
-								class="form-control"
-								name="uf"
-								id="uf"
-								placeholder="Insira o Estado"/>
-						</div>
+						
 						
 					</div>
 					<div class="modal-footer">
@@ -286,7 +211,7 @@
 						data-bs-dismiss="modal">
 						Voltar
 					</button>
-					<button type="button" class="btn btn-primary">Salvar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
 				</form>
 				</div>
 			</div>
@@ -295,19 +220,18 @@
 	</div>
 	</div>
 												
-
-
-												<!-- Modal trigger button -->
-												<button
-													type="button"
-													class="btn btn-danger btn-lg"
-													data-bs-toggle="modal"
-													data-bs-target="#modalexcluir"
-												>
-												<i class="fa-solid fa-trash-can"></i></button>
-												
-												<!-- Modal Body -->
-												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+											
+	<!-- Modal trigger button -->
+	<button
+	type="button"
+	class="btn btn-danger btn-lg"
+	data-bs-toggle="modal"
+	data-bs-target="#modalexcluir"
+	>
+	<i class="fa-solid fa-trash-can"></i></button>
+	<!-- Modal Body -->
+	<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+	<form action="excluirProduto.php" method="POST">
 												<div
 													class="modal fade"
 													id="modalexcluir"
@@ -324,7 +248,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Excluir dados do cliente <?php echo $idclientes ?>
+																	Excluir dados de <?php echo $nome ?>
 																</h5>
 																<button
 																	type="button"
@@ -341,21 +265,46 @@
 																	data-bs-dismiss="modal">
 																	Voltar
 																</button>
-																<button type="button" class="btn btn-danger">Excluir</button>
+																<input type="hidden" name="id" value="<?php echo $id; ?>">
+																<button type="submit" class="btn btn-danger">Excluir</button>
 															</div>
 														</div>
 													</div>
-												</div>
-												
+												</div> 
+											</form>
+													
 												<!-- Optional: Place to the bottom of scripts -->
+												
 												<script>
 													const myModal = new bootstrap.Modal(
 														document.getElementById("modalId"),
 														options,
 													);
-												</script>
-												
-												</td>
+													
+													document.addEventListener('DOMContentLoaded', function() {
+														// Formata o CPF
+														const cpfInput = document.getElementById('cpf');
+														cpfInput.addEventListener('input', function (event) {
+            const cpf = event.target.value.replace(/\D/g, '');
+            let cpfFormatado = '';
+            if (cpf.length > 0) {
+				cpfFormatado = cpf.substring(0, 3);
+                if (cpf.length > 3) {
+					cpfFormatado += '.' + cpf.substring(3, 6);
+                    if (cpf.length > 6) {
+						cpfFormatado += '.' + cpf.substring(6, 9);
+                        if (cpf.length > 9) {
+							cpfFormatado += '-' + cpf.substring(9, 11);
+                        }
+                    }
+                }
+            }
+            event.target.value = cpfFormatado;
+        });
+    });
+	
+	</script>
+	</td>
 								</tr>
 
 							<?php } ?>

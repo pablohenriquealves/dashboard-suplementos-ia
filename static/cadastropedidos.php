@@ -1,13 +1,14 @@
 
 <?php 
 $nomeCliente = $_POST['nomeCliente'];
-$pedido = $_POST['pedido'];
+$produto = $_POST['produto'];
 $observacoes = $_POST['observacoes'];
+$valor = $_POST['valor'];
 
 require('conexao.php');
 
 
-$sql = "INSERT INTO pedidos (nomeCliente, pedido, observacoes) VALUES ('$nome_cliente','$pedido', '$observacoes')";
+$sql = "INSERT INTO pedidos (nomeCliente, produto, observacoes, valor) VALUES ('$nomeCliente','$produto', '$observacoes', '$valor')";
 
     if(mysqli_query($conexao,$sql)){
         echo "Registro inserido com sucesso";
@@ -18,9 +19,6 @@ $sql = "INSERT INTO pedidos (nomeCliente, pedido, observacoes) VALUES ('$nome_cl
     mysqli_close($conexao);
 
     header("location:formpedidos.php");
-
-
-
 
 
 ?>

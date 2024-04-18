@@ -21,14 +21,14 @@
         <h3>Novo Pedido</h3>
         <form method="post" action="cadastropedidos.php">
             <div class="form-group">
-                <label for="">Selecione o Cliente:</label>
+                <label for="">Selecione o Cliente</label>
 				<select name="nomeCliente" id="nomeCliente">
 				<?php
-                require ('script/conexao.php');
-                $sql = "SELECT ";
+                require ('conexao.php');
+                $sql = "SELECT * FROM cliente";
                 $resultado = mysqli_query($conexao, $sql);
                 while ($row = mysqli_fetch_assoc($resultado)) {
-                    echo "<option value='{$row['turma']}'>{$row['dnome']} - Prof. {$row['pnome']} </option>";
+                    echo "<option value='{$row['id']}'>{$row['nome']}</option>";
                 }
             ?>
 
@@ -39,39 +39,35 @@
 
 			</div>
             <div class="form-group">
-                <label for="produto">Selecione os Produtos:</label>
+                <label for="produto">Selecione os Produtos</label>
 				<select name="produto" id="produto">
 				<?php
                 require ('conexao.php');
-                $sql = "SELECT FROM produto";
+                $sql = "SELECT * FROM produto";
                 $resultado = mysqli_query($conexao, $sql);
                 while ($row = mysqli_fetch_assoc($resultado)) {
-                    echo "<option value='{$row['turma']}'>{$row['dnome']} - Prof. {$row['pnome']} </option>";
+                    echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
                 }
             ?>
-
-
-
-
 				</select>
 
 			</div>
             <button type="submit" class="btn btn-primary">Enviar Pedido</button>
-        </form>
+        </form><br>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="observacoes">Observações:</label>
-            <textarea class="form-control" id="observacoes" name="observacoes"></textarea>
+            <label for="observacoes">Observações</label>
+            <textarea class="form-control"  rows = "1"id="observacoes" name="observacoes"></textarea>
         </div>
         <div class="form-group">
-                <label for="valor">Valor:</label>
-                <input type="number" class="form-control" id="valor" name="valor" step="any" required>
+                <label for="valor">Valor dos Produtos</label>
+                <input type="number" class="form-control" id="valor" name="valor" step="0.01" required>
             </div>
     </div>
 </div>
                 
-			<div class="main">
+<div class="main">
 				<div
 					class="table-responsive"
 				>
@@ -79,35 +75,32 @@
 						class="table table-bordered"
 					>
 						<thead>
-                        <tr><th colspan="7" style="text-align: center;">Pedidos realizados</th></tr>
+                        <tr><th colspan="7" style="text-align: center;">Pedidos Cadastrados</th></tr>
 							<tr class="text-center">
-								<th scope="col">Nome</th>
-								<th scope="col">Email</th>
-								<th scope="col">Telefone</th>
-								<th scope="col">CPF</th>
+								<th scope="col">Cliente</th>
+								<th scope="col">Produtos</th>
+								<th scope="col">Valor</th>
 								<th scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php include 'conexao.php';
 
-							$sql = "SELECT * FROM vendedor";
+							$sql = "SELECT * FROM pedidos";
 							$busca = mysqli_query($conexao, $sql);
 
 							while ($dados = mysqli_fetch_array($busca)){
 								$id = $dados['id'];
-								$nome = $dados['nome'];
-								$email = $dados['email'];
-								$telefone = $dados['telefone'];
-								$cpf = $dados['cpf'];
+								$nome = $dados['nomeCliente'];
+								$produto = $dados['produto'];
+								$valor = $dados['valor'];
 						
 							?>
 
 								<tr class="text-center">
 									<td><?php echo $nome ?></td>
-									<td><?php echo $email ?></td>
-									<td><?php echo $telefone ?></td>
-									<td><?php echo $cpf ?></td>
+									<td><?php echo $produto ?></td>
+									<td><?php echo $valor ?></td>
 									<td>
 												<!-- Modal trigger button -->
 												<button
@@ -138,7 +131,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Editar cadastro vendedor 
+																	Editar Pedido de  
 																	 <?php echo $nome ?>
 																</h5>
 																<button
@@ -149,31 +142,45 @@
 															</div>
 
 															<div class="modal-body">
-																<form action="atualizarvendedor.php" method="POST">
+																<form action="atualizarPedidos.php" method="POST">
                                                                     
 																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 																<div class="container-fluid p-0">
 
-					<h3 class="h3 mb-3">Dados do vendedor</h3>
+					<h3 class="h3 mb-3">Dados do Pedido</h3>
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="nome" class="form-label">Nome</label>
-							<input
-								type="text"
-								class="form-control"
-								name="nome"
-								id="nome"
-								placeholder="Digite o nome do vendedor"/>
+							<label for="nome" class="form-label">Cliente</label>
+							<select name="nomeCliente" id="nomeCliente">
+				<?php
+                require ('conexao.php');
+                $sql = "SELECT * FROM cliente";
+                $resultado = mysqli_query($conexao, $sql);
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                    echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                }
+            ?>
+
+
+
+
+				</select>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="email" class="form-label">E-mail</label>
-							<input
-								type="email"
-								class="form-control"
-								name="email"
-								id="email"
-								placeholder="Digite o E-mail"/>
+							<label for="produto" class="form-label">Produtos</label>
+				<select name="produto" id="produto">
+				<?php
+                require ('conexao.php');
+                $sql = "SELECT * FROM produto";
+                $resultado = mysqli_query($conexao, $sql);
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                    echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
+                }
+            ?>
+				</select>
+
+			</div>
 						</div>
 						
 						
@@ -181,24 +188,15 @@
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="telefone" class="form-label">Telefone</label>
+							<label for="valor" class="form-label">Valor</label>
 							<input
 								type="text"
 								class="form-control"
-								name="telefone"
-								id="telefone"
-								placeholder="Digite o telefone"/>
+								name="valor"
+								id="valor"
+								placeholder="Digite o valor"/>
 						</div>
-						<div class="mb-3 col-12">
-							<label for="cpf" class="form-label">CPF</label>
-							<input
-								type="text"
-								class="form-control"
-								name="cpf"
-								id="cpf"
-								placeholder="Digite o CPF" required/>
-						</div>
-						
+												
 						
 					</div>
 					<div class="modal-footer">
@@ -228,7 +226,7 @@
 	<i class="fa-solid fa-trash-can"></i></button>
 	<!-- Modal Body -->
 	<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-	<form action="excluirVendedor.php" method="POST">
+	<form action="excluirPedidos.php" method="POST">
 												<div
 													class="modal fade"
 													id="modalexcluir"
@@ -277,7 +275,28 @@
 														document.getElementById("modalId"),
 														options,
 													);
-																				
+													
+													document.addEventListener('DOMContentLoaded', function() {
+														// Formata o CPF
+														const cpfInput = document.getElementById('cpf');
+														cpfInput.addEventListener('input', function (event) {
+            const cpf = event.target.value.replace(/\D/g, '');
+            let cpfFormatado = '';
+            if (cpf.length > 0) {
+				cpfFormatado = cpf.substring(0, 3);
+                if (cpf.length > 3) {
+					cpfFormatado += '.' + cpf.substring(3, 6);
+                    if (cpf.length > 6) {
+						cpfFormatado += '.' + cpf.substring(6, 9);
+                        if (cpf.length > 9) {
+							cpfFormatado += '-' + cpf.substring(9, 11);
+                        }
+                    }
+                }
+            }
+            event.target.value = cpfFormatado;
+        });
+    });
 	
 	</script>
 	</td>

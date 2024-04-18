@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 19-Abr-2024 às 00:13
+-- Tempo de geração: 19-Abr-2024 às 01:50
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -40,6 +40,13 @@ CREATE TABLE `cliente` (
   `arquivo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `logradouro`, `numero`, `complemento`, `arquivo`) VALUES
+(9, 'Pablo', 'pablo@gmail.com', '(85) 6 8844', '6565411515', '60484111', 'Rua senac', '55', '565', 'img/clientes/04515c0cb57eba7383734b19b8f6e403.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -63,7 +70,6 @@ CREATE TABLE `fornecedor` (
 --
 
 INSERT INTO `fornecedor` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `logradouro`, `numero`, `complemento`) VALUES
-(3, 'Fornecedor A', 'fornecedorA@example.com', '(11) 1 2345', '12.345.678/000', '12345-67', 'Rua das Flores', '123', 'Sala 101'),
 (4, 'Distribuidora B Ltda.', 'distribuidoraB@example.com', '(21) 9 8765', '98.765.432/000', '54321-87', 'Avenida dos Sonhos', '456', '-'),
 (5, 'Fornecedores Cia', 'fornecedores@example.com', '(31) 5 5554', '', '32165-78', 'Travessa das Pedras', '789', '-'),
 (6, 'Mega Suprimentos', 'mega@example.com', '(41) 3 3332', '33.222.111/000', '98765-43', 'Rua dos Abacaxis', '1010', '-'),
@@ -97,7 +103,8 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `nomeproduto`, `descricao`, `estoque`, `fornecedor`, `cnpjfornecedor`, `preco`, `categoria`, `arquivo`) VALUES
-(4, 'Whey', 'Soro', 100, '', 2147483647, 100, 'Whey', 'img/produtos/075fa6577609812e11b0260a514fe93b.jpeg');
+(4, 'Whey', 'Soro', 100, '', 2147483647, 100, 'Whey', 'img/produtos/075fa6577609812e11b0260a514fe93b.jpeg'),
+(5, 'Creatina', 'creat', 100, '', 545454544, 100, 'Creat', 'img/produtos/ddebefd7edafcee6c9d07cf15ce0932e.jpg');
 
 --
 -- Índices para tabelas despejadas
@@ -129,7 +136,7 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
@@ -141,7 +148,7 @@ ALTER TABLE `fornecedor`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

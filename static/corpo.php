@@ -105,25 +105,23 @@
             <h5 class="card-title mb-0">Movimentação Recente</h5>
         </div>
 
-	<div class="card-body py-3">
-            <div class="main">
-                <div class="table-responsive overflow-auto"> <!-- Aqui adicionamos a classe overflow-auto -->
-                    <table class="table table-bordered">
+        <div class="card-body py-3">
+                <div class="table-responsive overflow-auto">
+                    <table class="table">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">Nome</th>
                                 <th scope="col">Pedido</th>
                                 <th scope="col">Valor</th>
-                                <th scope="col">Obs</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php include 'conexao.php';
-
+                            <?php
+                            include 'conexao.php';
                             $sql = "SELECT * FROM pedidos";
                             $busca = mysqli_query($conexao, $sql);
 
-                            while ($dados = mysqli_fetch_array($busca)){
+                            while ($dados = mysqli_fetch_array($busca)) {
                                 $id = $dados['id'];
                                 $nome = $dados['nome'];
                                 $produto = $dados['produto'];
@@ -133,19 +131,18 @@
                                 <tr class="text-center">
                                     <td><?php echo $nome ?></td>
                                     <td><?php echo $id ?></td>
-                                    <td><?php echo $valor ?></td>                            
-                                    <td><?php echo $obs ?></td>                            
+                                    <td><?php echo $valor ?></td>
                                 </tr>
-								
-								<?php } ?>
-							</tbody>
-						</table>
-					</div>	
-						
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-			</div>
-	</div>	
+                            <?php } ?>
+                        </tbody>
+                    </table>
+					
+									<button type="submit" class="btn btn-primary">
+										<a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todos</a>
+									</button>
+                </div>
+        </div>
+    </div>
 </div>
 
 					<div class="row">
@@ -155,75 +152,41 @@
 
 									<h5 class="card-title mb-0">Últimos produtos cadastrados</h5>
 								</div>
-								<table class="table table-hover my-0">
-									<thead>
-										<tr>
-											<th>Nome</th>
-											<th class="d-none d-xl-table-cell">Data de Início</th>
-											<th class="d-none d-xl-table-cell">Data de Término</th>
-											<th>Status</th>
-											<th class="d-none d-md-table-cell">Responsável</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Finalizado</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-danger">Cancelado</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Finalizado</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">Em Progresso</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Finalizado</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Finalizado</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Finalizado</span></td>
-											<td class="d-none d-md-table-cell">Christina Mason</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">Em Progresso</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-									</tbody>
-								</table>
+								<div class="table-responsive overflow-auto">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">Nome</th>
+                                <th scope="col">Pedido</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include 'conexao.php';
+                            $sql = "SELECT * FROM pedidos";
+                            $busca = mysqli_query($conexao, $sql);
+
+                            while ($dados = mysqli_fetch_array($busca)) {
+                                $id = $dados['id'];
+                                $nome = $dados['nome'];
+                                $produto = $dados['produto'];
+                                $obs = $dados['observacoes'];
+                                $valor = $dados['valor'];
+                            ?>
+                                <tr class="text-center">
+                                    <td><?php echo $nome ?></td>
+                                    <td><?php echo $id ?></td>
+                                    <td><?php echo $valor ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todos</a>
+                </button>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">

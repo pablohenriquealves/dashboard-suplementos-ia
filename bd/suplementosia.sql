@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 17-Abr-2024 às 01:23
+-- Tempo de geração: 19-Abr-2024 às 00:13
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -82,7 +82,7 @@ INSERT INTO `fornecedor` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `
 
 CREATE TABLE `produto` (
   `id` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
+  `nomeproduto` varchar(45) NOT NULL,
   `descricao` varchar(100) NOT NULL,
   `estoque` int(11) NOT NULL,
   `fornecedor` varchar(45) NOT NULL,
@@ -91,6 +91,13 @@ CREATE TABLE `produto` (
   `categoria` varchar(45) NOT NULL,
   `arquivo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`id`, `nomeproduto`, `descricao`, `estoque`, `fornecedor`, `cnpjfornecedor`, `preco`, `categoria`, `arquivo`) VALUES
+(4, 'Whey', 'Soro', 100, '', 2147483647, 100, 'Whey', 'img/produtos/075fa6577609812e11b0260a514fe93b.jpeg');
 
 --
 -- Índices para tabelas despejadas
@@ -134,7 +141,7 @@ ALTER TABLE `fornecedor`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

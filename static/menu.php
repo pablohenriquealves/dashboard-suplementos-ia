@@ -25,13 +25,13 @@
 	
 						<li class="sidebar-item">
 							<a class="sidebar-link bg-danger" href="formproduto.php">
-	              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Produto</span>
+	              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Produtos</span>
 	            </a>
 						</li>
 	
 						<li class="sidebar-item">
 							<a class="sidebar-link bg-danger" href="formfornecedor.php">
-	              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Fornecedor</span>
+	              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Fornecedores</span>
 	            </a>
 						</li>
 						

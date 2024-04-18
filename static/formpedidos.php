@@ -21,13 +21,41 @@
         <h3>Novo Pedido</h3>
         <form method="post" action="cadastropedidos.php">
             <div class="form-group">
-                <label for="nome_cliente">Nome do Cliente:</label>
-                <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" required>
-            </div>
+                <label for="">Selecione o Cliente:</label>
+				<select name="nomeCliente" id="nomeCliente">
+				<?php
+                require ('script/conexao.php');
+                $sql = "SELECT ";
+                $resultado = mysqli_query($conexao, $sql);
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                    echo "<option value='{$row['turma']}'>{$row['dnome']} - Prof. {$row['pnome']} </option>";
+                }
+            ?>
+
+
+
+
+				</select>
+
+			</div>
             <div class="form-group">
-                <label for="produto">Produtos:</label>
-                <input type="text" class="form-control" id="produto" name="produto" required>
-            </div>
+                <label for="produto">Selecione os Produtos:</label>
+				<select name="produto" id="produto">
+				<?php
+                require ('conexao.php');
+                $sql = "SELECT FROM produto";
+                $resultado = mysqli_query($conexao, $sql);
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                    echo "<option value='{$row['turma']}'>{$row['dnome']} - Prof. {$row['pnome']} </option>";
+                }
+            ?>
+
+
+
+
+				</select>
+
+			</div>
             <button type="submit" class="btn btn-primary">Enviar Pedido</button>
         </form>
     </div>

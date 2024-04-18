@@ -16,7 +16,7 @@
 				<form action="cadastroproduto.php" method="post"  enctype="multipart/form-data">
 					<div class="container">
 
-						<h1 class="h3 mb-3">Cadastro do Produto</h1>
+						<h1 class="h3 mb-3">Cadastro de Produtos</h1>
 
 						<div class="row">
 							<div class="mb-3 col-6">
@@ -97,7 +97,7 @@
 							while ($dados = mysqli_fetch_array($busca)){
 								$idprodutos = $dados['id'];
 								$imagem = $dados['arquivo'];
-								$produto = $dados['nome'];
+								$produto = $dados['nomeproduto'];
 								$preco = $dados['preco'];
 								$estoque = $dados['estoque'];
 								$categoria = $dados['categoria'];

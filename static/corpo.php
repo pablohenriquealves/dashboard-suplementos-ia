@@ -102,7 +102,7 @@
 						<div class="col-xl-6 col-xxl-7">
     <div class="card flex-fill w-100">
         <div class="card-header">
-            <h5 class="card-title mb-0">Movimentação Recente</h5>
+            <h5 class="card-title mb-0">Vendas Recentes</h5>
         </div>
 
         <div class="card-body py-3">
@@ -110,8 +110,8 @@
                     <table class="table">
                         <thead>
                             <tr class="text-center">
-                                <th scope="col">Nome</th>
-                                <th scope="col">Pedido</th>
+                                <th class="col-4" scope="col">Nome do Cliente</th>
+                                <th scope="col">Nº Pedido</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
@@ -123,7 +123,7 @@
 
                             while ($dados = mysqli_fetch_array($busca)) {
                                 $id = $dados['id'];
-                                $nome = $dados['nome'];
+                                $nome = $dados['nomeCliente'];
                                 $produto = $dados['produto'];
                                 $obs = $dados['observacoes'];
                                 $valor = $dados['valor'];
@@ -137,12 +137,10 @@
                         </tbody>
                     </table>
 					
-									<button type="submit" class="btn btn-primary">
-										<a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todos</a>
-									</button>
                 </div>
-        </div>
-    </div>
+			</div>
+			<button type="submit" class="btn btn-primary"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas vendas</a></button>
+		</div>
 </div>
 
 					<div class="row">
@@ -150,45 +148,45 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Últimos produtos cadastrados</h5>
+									<h5 class="card-title mb-0">Últimos Produtos Cadastrados</h5>
 								</div>
 								<div class="table-responsive overflow-auto">
                     <table class="table">
                         <thead>
                             <tr class="text-center">
+							<th scope="col"></th>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Pedido</th>
+                                <th scope="col">Estoque</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             include 'conexao.php';
-                            $sql = "SELECT * FROM pedidos";
+                            $sql = "SELECT * FROM produto";
                             $busca = mysqli_query($conexao, $sql);
 
                             while ($dados = mysqli_fetch_array($busca)) {
                                 $id = $dados['id'];
-                                $nome = $dados['nome'];
-                                $produto = $dados['produto'];
-                                $obs = $dados['observacoes'];
-                                $valor = $dados['valor'];
+								$imagem = $dados['arquivo'];
+                                $nome = $dados['nomeproduto'];
+								$estoque = $dados['estoque'];
+                                $preco = $dados['preco'];
+
                             ?>
                                 <tr class="text-center">
+								<td><img src="<?php echo $imagem ?>" width="40px" height="100%"></td>
                                     <td><?php echo $nome ?></td>
-                                    <td><?php echo $id ?></td>
-                                    <td><?php echo $valor ?></td>
+                                    <td><?php echo $estoque ?></td>
+                                    <td><?php echo $preco ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
                     </table>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    <a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todos</a>
-                </button>
-							</div>
-						</div>
+					<div><button type="submit" class="btn btn-primary"><a href="formprodutos.php" style="text-decoration: none; color: white;">Ver todos</a></button></div>				
+				</div>
+			</div>
+		</div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
 							<div class="card flex-fill w-100">
 								<div class="card-header">

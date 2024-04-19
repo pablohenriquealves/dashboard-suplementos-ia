@@ -25,8 +25,19 @@
 							</div>
 							<div class="mb-3 col-6">
 								<label for="categoria" class="form-label">Categoria</label>
-								<input type="text" class="form-control" name="categoria" id="categoria" placeholder="Categoria do produto" />
-							</div>
+								<select class="form-select" name="categoria" id="categoria" aria-label="Default select example">
+									<option selected> </option>
+									
+									<?php
+									require ('conexao.php');
+									$sql = "SELECT * FROM categorias";
+									$resultado = mysqli_query($conexao, $sql);
+									while ($row = mysqli_fetch_assoc($resultado)) {
+										echo "<option value='{$row['categoria']}'>{$row['categoria']}</option>";
+									}
+									?>
+									</select>
+								</div>
 							
 						</div>
 						<div class="row">
@@ -37,7 +48,7 @@
 							
 							<div class="mb-3 col-6">
 								<label for="cnpjfornecedor" class="form-label">CNPJ do Fornecedor</label>
-								<input type="text" class="form-control" name="cnpjfornecedor" id="cnpjfornecedor" placeholder="Digite o CNPJ do fornecedor" />
+								<input type="text" class="form-control" name="cpfcnpj" id="cpfcnpj" placeholder="Digite o CNPJ do fornecedor" />
 							</div>
 					
 						</div>
@@ -142,7 +153,7 @@
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
 																	Editar Cadastro do Produto 
-																	 <?php echo $nome ?>
+																	 <?php echo $produto ?>
 																</h5>
 																<button
 																	type="button"
@@ -161,7 +172,7 @@
 
 					<div class="row">
 						<div class="mb-3 col-12">
-						<label for="imagem" class="form-label">Logo/Imagem Pessoal</label>
+						<label for="imagem" class="form-label">Imagem do Produto</label>
 							<input
 								type="file"
 								class="form-control"
@@ -170,7 +181,7 @@
 								placeholder="Insira a imagem do produto"/>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="email" class="form-label">Produto</label>
+							<label for="email" class="form-label">Nome do Produto</label>
 							<input
 								type="text"
 								class="form-control"
@@ -200,6 +211,21 @@
 								name="estoque"
 								id="estoque"
 								placeholder="Digite o estoque disponível" required/>
+						</div>
+						<div class="mb-3 col-12">
+							<label for="categoria" class="form-label">Categoria</label>
+							<select class="form-select" name="categoria" id="categoria" aria-label="Default select example">
+									<option selected> </option>
+									
+									<?php
+									require ('conexao.php');
+									$sql = "SELECT * FROM categorias";
+									$resultado = mysqli_query($conexao, $sql);
+									while ($row = mysqli_fetch_assoc($resultado)) {
+										echo "<option value='{$row['categoria']}'>{$row['categoria']}</option>";
+									}
+									?>
+									</select>
 						</div>
 						
 						
@@ -248,7 +274,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Excluir dados de <?php echo $nome ?>
+																	Excluir dados de <?php echo $produto ?>
 																</h5>
 																<button
 																	type="button"

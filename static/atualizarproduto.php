@@ -4,7 +4,7 @@ require('conexao.php');
 $nomeproduto = $_POST['nomeproduto'];
 $descricao = $_POST['descricao'];
 $estoque = $_POST['estoque'];
-$cnpjfornecedor = $_POST['cnpjfornecedor'];
+$cpfcnpj = $_POST['cpfcnpj'];
 $preco = $_POST['preco'];
 $categoria = $_POST['categoria'];
 $arquivo = $_FILES['imagem'];
@@ -21,7 +21,7 @@ if($arquivo !== null) {
         // Supondo que você tenha um campo para identificar o produto que será atualizado, chamado de 'id_produto'
         $id_produto = $_POST['id'];
 
-        $sql = "UPDATE produto SET nomeproduto='$nomeproduto', descricao='$descricao', estoque='$estoque', cnpjfornecedor='$cnpjfornecedor', preco='$preco', categoria='$categoria', arquivo='$caminho_arquivo' WHERE id='$id_produto'";
+        $sql = "UPDATE produto SET nomeproduto='$nomeproduto', descricao='$descricao', estoque='$estoque', cpfcnpj='$cpfcnpj', preco='$preco', categoria='$categoria', arquivo='$caminho_arquivo' WHERE id='$id_produto'";
 
         if(mysqli_query($conexao,$sql)){
             echo "Registro atualizado com sucesso";

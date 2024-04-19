@@ -125,7 +125,7 @@
                                 $id = $dados['id'];
                                 $nome = $dados['nomeCliente'];
                                 $produto = $dados['produto'];
-                                $obs = $dados['observacoes'];
+                                $obs = $dados['observacao'];
                                 $valor = $dados['valor'];
                             ?>
                                 <tr class="text-center">
@@ -139,58 +139,59 @@
 					
                 </div>
 			</div>
-			<button type="submit" class="btn btn-primary"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas vendas</a></button>
+			<button type="button" class="btn btn-primary"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas vendas</a></button>
 		</div>
 </div>
 
 					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
-								<div class="card-header">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex align-items-stretch"> <!-- Adicionei a classe "align-items-stretch" aqui -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Últimos Produtos Cadastrados</h5>
+            </div>
+            <div class="table-responsive overflow-auto">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col"></th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Estoque</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include 'conexao.php';
+                        $sql = "SELECT * FROM produto";
+                        $busca = mysqli_query($conexao, $sql);
 
-									<h5 class="card-title mb-0">Últimos Produtos Cadastrados</h5>
-								</div>
-								<div class="table-responsive overflow-auto">
-                    <table class="table">
-                        <thead>
+                        while ($dados = mysqli_fetch_array($busca)) {
+                            $id = $dados['id'];
+                            $imagem = $dados['arquivo'];
+                            $nome = $dados['nomeproduto'];
+                            $estoque = $dados['estoque'];
+                            $preco = $dados['preco'];
+
+                        ?>
                             <tr class="text-center">
-							<th scope="col"></th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Estoque</th>
-                                <th scope="col">Valor</th>
+                                <td><img src="<?php echo $imagem ?>" width="40px" height="100%"></td>
+                                <td><?php echo $nome ?></td>
+                                <td><?php echo $estoque ?></td>
+                                <td><?php echo $preco ?></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include 'conexao.php';
-                            $sql = "SELECT * FROM produto";
-                            $busca = mysqli_query($conexao, $sql);
+                        <?php } ?>
+                    </tbody>
+                </table>
 
-                            while ($dados = mysqli_fetch_array($busca)) {
-                                $id = $dados['id'];
-								$imagem = $dados['arquivo'];
-                                $nome = $dados['nomeproduto'];
-								$estoque = $dados['estoque'];
-                                $preco = $dados['preco'];
-
-                            ?>
-                                <tr class="text-center">
-								<td><img src="<?php echo $imagem ?>" width="40px" height="100%"></td>
-                                    <td><?php echo $nome ?></td>
-                                    <td><?php echo $estoque ?></td>
-                                    <td><?php echo $preco ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-					<div><button type="submit" class="btn btn-primary"><a href="formprodutos.php" style="text-decoration: none; color: white;">Ver todos</a></button></div>				
-				</div>
-			</div>
-		</div>
+            </div>
+            <div class="card-footer mt-auto">
+                <button type="button" class="btn btn-primary w-100"><a href="formproduto.php" style="text-decoration: none; color: white;">Ver todos</a></button>
+            </div>
+        </div>
+    </div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
-
 									<h5 class="card-title mb-0">Vendas Mensais</h5>
 								</div>
 								<div class="card-body d-flex w-100">

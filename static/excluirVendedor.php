@@ -2,7 +2,7 @@
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
-$cpf = $_POST['cpf'];
+$cpf = $_POST['cpfcnpj'];
 $id = $_POST['id'];
 require('conexao.php');
 

@@ -6,10 +6,9 @@ $valor = $_POST['valor'];
 
 require('conexao.php');
 
-// Supondo que você tenha um campo para identificar o pedido que será atualizado, chamado de 'id_pedido'
 $id_pedido = $_POST['id'];
 
-$sql = "UPDATE pedidos SET nomeCliente='$nomeCliente', produto='$produto', observacoes='$observacoes', valor='$valor' WHERE id='$id_pedido'";
+$sql = "UPDATE pedidos SET nomeCliente='$nomeCliente', produto='$produto', observacoes='$observacoes', valor='$valor' WHERE id_pedidos='$id_pedido'";
 
 if(mysqli_query($conexao, $sql)){
     echo "Registro atualizado com sucesso";

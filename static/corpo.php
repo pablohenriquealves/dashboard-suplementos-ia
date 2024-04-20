@@ -116,18 +116,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            include 'conexao.php';
-                            $sql = "SELECT * FROM pedidos";
-                            $busca = mysqli_query($conexao, $sql);
+                            <?php include 'conexao.php';
 
-                            while ($dados = mysqli_fetch_array($busca)) {
-                                $id = $dados['id'];
-                                $nome = $dados['nomeCliente'];
-                                $produto = $dados['produto'];
-                                $obs = $dados['observacao'];
-                                $valor = $dados['valor'];
-                            ?>
+							$sql = "SELECT p.id_pedidos, c.nome AS nomeCliente, p.produto, p.valor, pr.nomeproduto, pr.id
+							FROM pedidos p
+							INNER JOIN cliente c ON p.nomeCliente = c.id
+							INNER JOIN produtos pr ON p.produto = pr.id";							
+							$busca = mysqli_query($conexao, $sql);
+							
+														while ($dados = mysqli_fetch_array($busca)){
+															$id = $dados['id_pedidos'];
+															$nome = $dados['nomeCliente'];
+															$produto = $dados['nomeproduto'];
+															$valor = $dados['valor'];
+													
+														?>
+
                                 <tr class="text-center">
                                     <td><?php echo $nome ?></td>
                                     <td><?php echo $id ?></td>
@@ -139,7 +143,9 @@
 					
                 </div>
 			</div>
-			<button type="button" class="btn btn-primary"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas vendas</a></button>
+			<div class="card-footer mt-auto">
+			<button class="btn btn-primary w-100" type="button"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas as vendas</a></button>
+			</div>
 		</div>
 </div>
 
@@ -162,7 +168,7 @@
                     <tbody>
                         <?php
                         include 'conexao.php';
-                        $sql = "SELECT * FROM produto";
+                        $sql = "SELECT * FROM produtos";
                         $busca = mysqli_query($conexao, $sql);
 
                         while ($dados = mysqli_fetch_array($busca)) {
@@ -185,18 +191,56 @@
 
             </div>
             <div class="card-footer mt-auto">
-                <button type="button" class="btn btn-primary w-100"><a href="formproduto.php" style="text-decoration: none; color: white;">Ver todos</a></button>
+                <button type="button" class="btn btn-primary w-100"><a href="formproduto.php" style="text-decoration: none; color: white;">Ver todos os produtos</a></button>
             </div>
         </div>
     </div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Vendas Mensais</h5>
+									<h5 class="card-title mb-0">Vendedore do Mês</h5>
 								</div>
 								<div class="card-body d-flex w-100">
 									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
+										<div class="table-responsive overflow-auto">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include 'conexao.php';
+                        $sql = "SELECT * FROM vendedor";
+                        $busca = mysqli_query($conexao, $sql);
+
+                        while ($dados = mysqli_fetch_array($busca)) {
+                            $id = $dados['id'];
+                            $nome = $dados['nome'];                   
+
+                        ?>
+                            <tr class="text-center">
+                                <td><?php echo $nome ?></td>
+                                               </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 									</div>
 								</div>
 							</div>

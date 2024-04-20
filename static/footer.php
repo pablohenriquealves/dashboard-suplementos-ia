@@ -1,5 +1,5 @@
 
-<script>
+<!-- <script>
     // Formata o número de telefone
     const telefoneInput = document.getElementById('telefone');
     telefoneInput.addEventListener('input', function (event) {
@@ -74,7 +74,9 @@
         }
         event.target.value = numeroFormatado;
     });
-</script>
+</script> -->
+
+<script src="js/bootstrap-multiselect.js"></script>
 
 <div class="container-fluid">
 					<div class="row text-muted">

@@ -21,7 +21,7 @@ if($arquivo !== null) {
         move_uploaded_file($arquivo['tmp_name'], $caminho_arquivo);
 
        
-        $sql = "INSERT INTO produto (nomeproduto, descricao, estoque, cpfcnpj, preco, categoria, arquivo) VALUES ('$nomeproduto','$descricao', '$estoque', '$cpfcnpj', '$preco', '$categoria', '$caminho_arquivo')";
+        $sql = "INSERT INTO produtos (nomeproduto, descricao, estoque, cpfcnpj, preco, categoria, arquivo) VALUES ('$nomeproduto','$descricao', '$estoque', '$cpfcnpj', '$preco', '$categoria', '$caminho_arquivo')";
 
 
         if(mysqli_query($conexao,$sql)){

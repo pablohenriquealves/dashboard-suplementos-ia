@@ -47,8 +47,19 @@
 							</div>
 							
 							<div class="mb-3 col-6">
-								<label for="cnpjfornecedor" class="form-label">CNPJ do Fornecedor</label>
-								<input type="text" class="form-control" name="cpfcnpj" id="cpfcnpj" placeholder="Digite o CNPJ do fornecedor" />
+								<label for="cpfcnpj" class="form-label">CNPJ do Fornecedor</label>
+								<select class="form-select" name="cpfcnpj" id="cpfcnpj" aria-label="Default select example">
+									<option selected> </option>
+									
+									<?php
+									require ('conexao.php');
+									$sql = "SELECT * FROM fornecedor";
+									$resultado = mysqli_query($conexao, $sql);
+									while ($row = mysqli_fetch_assoc($resultado)) {
+										echo "<option value='{$row['id']}'>{$row['cpfcnpj']}</option>";
+									}
+									?>
+									</select>
 							</div>
 					
 						</div>
@@ -77,12 +88,47 @@
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
 				</form>
+				<script>
+				const cpfcnpjInput = document.getElementById('cpfcnpj');
+    cpfcnpjInput.addEventListener('input', function (event) {
+        const numero = event.target.value.replace(/\D/g, '');
+        let numeroFormatado = '';
+        if (numero.length <= 11) { // CPF
+            numeroFormatado = numero.substring(0, 3);
+            if (numero.length > 3) {
+                numeroFormatado += '.' + numero.substring(3, 6);
+                if (numero.length > 6) {
+                    numeroFormatado += '.' + numero.substring(6, 9);
+                    if (numero.length > 9) {
+                        numeroFormatado += '-' + numero.substring(9, 11);
+                    }
+                }
+            }
+        } else { // CNPJ
+            numeroFormatado = numero.substring(0, 2);
+            if (numero.length > 2) {
+                numeroFormatado += '.' + numero.substring(2, 5);
+                if (numero.length > 5) {
+                    numeroFormatado += '.' + numero.substring(5, 8);
+                    if (numero.length > 8) {
+                        numeroFormatado += '/' + numero.substring(8, 12);
+                        if (numero.length > 12) {
+                            numeroFormatado += '-' + numero.substring(12, 14);
+                        }
+                    }
+                }
+            }
+        }
+        event.target.value = numeroFormatado;
+    });
+</script>
+<br>
 
 			
 
 				<div class="main">
 				<div
-					class="table-responsive"
+					class="table-responsive overflow-auto"
 				>
 					<table
 						class="table table-bordered"
@@ -102,7 +148,7 @@
 						<tbody>
 							<?php include 'conexao.php';
 
-							$sql = "SELECT * FROM produto";
+							$sql = "SELECT * FROM produtos";
 							$busca = mysqli_query($conexao, $sql);
 
 							while ($dados = mysqli_fetch_array($busca)){
@@ -128,8 +174,7 @@
 													type="button"
 													class="btn btn-warning btn-lg"
 													data-bs-toggle="modal"
-													data-bs-target="#modaleditar"
-													data-id="<?php echo $id ?>"
+													data-bs-target="#modaleditar_<?php echo $id ?>"
 												>
 												<i class="fa-solid fa-file-pen"></i></button>
 												
@@ -137,7 +182,7 @@
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 												<div
 													class="modal fade"
-													id="modaleditar"
+													id="modaleditar_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -165,7 +210,7 @@
 															<div class="modal-body">
 																<form action="atualizarProduto.php" method="POST">
                                                                     
-																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+																	<input type="hidden" name="id" value="<?php echo $id ?>">
 																<div class="container-fluid p-0">
 
 					<h3 class="h3 mb-3">Dados do Produto</h3>
@@ -181,7 +226,7 @@
 								placeholder="Insira a imagem do produto"/>
 						</div>
 						<div class="mb-3 col-12">
-							<label for="email" class="form-label">Nome do Produto</label>
+							<label for="nomeproduto" class="form-label">Nome do Produto</label>
 							<input
 								type="text"
 								class="form-control"
@@ -252,7 +297,7 @@
 	type="button"
 	class="btn btn-danger btn-lg"
 	data-bs-toggle="modal"
-	data-bs-target="#modalexcluir"
+	data-bs-target="#modalexcluir_<?php echo $id ?>"
 	>
 	<i class="fa-solid fa-trash-can"></i></button>
 	<!-- Modal Body -->
@@ -260,7 +305,7 @@
 	<form action="excluirProduto.php" method="POST">
 												<div
 													class="modal fade"
-													id="modalexcluir"
+													id="modalexcluir_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -291,7 +336,7 @@
 																	data-bs-dismiss="modal">
 																	Voltar
 																</button>
-																<input type="hidden" name="id" value="<?php echo $id; ?>">
+																<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 																<button type="submit" class="btn btn-danger">Excluir</button>
 															</div>
 														</div>
@@ -306,29 +351,7 @@
 														document.getElementById("modalId"),
 														options,
 													);
-													
-													document.addEventListener('DOMContentLoaded', function() {
-														// Formata o CPF
-														const cpfInput = document.getElementById('cpf');
-														cpfInput.addEventListener('input', function (event) {
-            const cpf = event.target.value.replace(/\D/g, '');
-            let cpfFormatado = '';
-            if (cpf.length > 0) {
-				cpfFormatado = cpf.substring(0, 3);
-                if (cpf.length > 3) {
-					cpfFormatado += '.' + cpf.substring(3, 6);
-                    if (cpf.length > 6) {
-						cpfFormatado += '.' + cpf.substring(6, 9);
-                        if (cpf.length > 9) {
-							cpfFormatado += '-' + cpf.substring(9, 11);
-                        }
-                    }
-                }
-            }
-            event.target.value = cpfFormatado;
-        });
-    });
-	
+														
 	</script>
 	</td>
 								</tr>

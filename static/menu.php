@@ -6,8 +6,8 @@
 	<nav id="sidebar" class="sidebar js-sidebar">
 		<!--bg-danger altera cor da sidebar na div abaixo-->
 				<div class="sidebar-content js-simplebar bg-danger">
-					<a class="sidebar-brand  bg-danger" href="index.php">
-	          <span class="align-middle">Suplementos IA</span>
+					<a style="text-decoration: none;" class="sidebar-brand  bg-danger" href="index.php">
+	          <span class="align-middle" >Suplementos IA</span>
 	          <i class="fa-solid fa-dumbbell"></i>
 	                </a>
 	

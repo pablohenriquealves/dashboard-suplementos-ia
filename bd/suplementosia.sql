@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Tempo de geração: 19-Abr-2024 às 01:50
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 7.4.27
+-- Host: 127.0.0.1
+-- Tempo de geração: 20/04/2024 às 23:30
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,131 +24,218 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cliente`
+-- Estrutura para tabela `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `categoria` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `categorias`
+--
+
+INSERT INTO `categorias` (`categoria`) VALUES
+('Emagrecedor'),
+('Energia'),
+('Funcional'),
+('Proteina');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cliente`
 --
 
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `telefone` varchar(11) NOT NULL,
-  `cpfcnpj` char(11) NOT NULL,
-  `cep` char(8) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `cpfcnpj` char(18) NOT NULL,
+  `cep` char(9) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
   `numero` char(10) NOT NULL,
   `complemento` varchar(45) NOT NULL,
   `arquivo` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `cliente`
+-- Despejando dados para a tabela `cliente`
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `logradouro`, `numero`, `complemento`, `arquivo`) VALUES
-(9, 'Pablo', 'pablo@gmail.com', '(85) 6 8844', '6565411515', '60484111', 'Rua senac', '55', '565', 'img/clientes/04515c0cb57eba7383734b19b8f6e403.jpg');
+(9, 'Pablo', 'pablo@gmail.com', '(55) 5 5555', '55.555.555/', '55555-55', 'Rua Senac', '55', '222222222222', 'img/clientes/24e3c1449eb813ce68125b541979e4f0.jpg'),
+(11, 'henrique', 'henrique@gmail.com', '(85) 5 5555-555', '55.555.555/5555-55', '55555-555', 'rua 55', '55', '55', 'img/clientes/a9fb961900355140edeb5661e315d006.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fornecedor`
+-- Estrutura para tabela `fornecedor`
 --
 
 CREATE TABLE `fornecedor` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `telefone` char(11) NOT NULL,
-  `cpfcnpj` char(14) NOT NULL,
-  `cep` char(8) NOT NULL,
+  `telefone` char(16) NOT NULL,
+  `cpfcnpj` char(18) NOT NULL,
+  `cep` char(9) NOT NULL,
   `logradouro` varchar(45) NOT NULL,
   `numero` char(10) NOT NULL,
   `complemento` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `fornecedor`
+-- Despejando dados para a tabela `fornecedor`
 --
 
 INSERT INTO `fornecedor` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`, `cep`, `logradouro`, `numero`, `complemento`) VALUES
-(4, 'Distribuidora B Ltda.', 'distribuidoraB@example.com', '(21) 9 8765', '98.765.432/000', '54321-87', 'Avenida dos Sonhos', '456', '-'),
-(5, 'Fornecedores Cia', 'fornecedores@example.com', '(31) 5 5554', '', '32165-78', 'Travessa das Pedras', '789', '-'),
-(6, 'Mega Suprimentos', 'mega@example.com', '(41) 3 3332', '33.222.111/000', '98765-43', 'Rua dos Abacaxis', '1010', '-'),
-(7, 'Importadora XYZ', 'importadoraXYZ@example.com', '(51) 7 7778', '77.888.999/000', '56789-01', 'Alameda das Estrelas', '222', '-'),
 (8, 'Fornecedor de Materiais ABC', 'materiaisABC@example.com', '(61) 6 6667', '66.777.888/000', '90123-45', 'Praça Central', '777', ''),
-(9, 'Comércio e Exportação Global', 'global@example.com', '(71) 4 4443', '44.333.222/000', '34567-89', 'Avenida dos Cometas', '1234', '-'),
-(10, 'Suprimentos do Brasil Ltda.', 'brasil@example.com', '(81) 9 9998', '99.888.777/000', '45678-90', 'Travessa dos Girassóis', '567', '-'),
+(10, '', '', '', '65548484848', '602548-74', '', '', ''),
 (11, 'Distribuidora de Eletrônicos Tech', 'tech@example.com', '(91) 7 7776', '77.666.555/000', '78901-23', 'Rua das Tecnologias', '888', '-'),
 (12, 'Indústria de Componentes Ltda', 'industria@example.com', '(92) 8 8889', '88.999.000/000', '23456-78', 'Avenida das Indústrias', '999', '-');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produto`
+-- Estrutura para tabela `pedidos`
 --
 
-CREATE TABLE `produto` (
+CREATE TABLE `pedidos` (
+  `id_pedidos` int(11) NOT NULL,
+  `nomeCliente` varchar(45) NOT NULL,
+  `produto` varchar(45) NOT NULL,
+  `observacoes` varchar(100) NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`id_pedidos`, `nomeCliente`, `produto`, `observacoes`, `valor`) VALUES
+(12, '9', '6', '', 240);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `produtos`
+--
+
+CREATE TABLE `produtos` (
   `id` int(11) NOT NULL,
   `nomeproduto` varchar(45) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `estoque` int(11) NOT NULL,
-  `fornecedor` varchar(45) NOT NULL,
-  `cnpjfornecedor` int(14) NOT NULL,
-  `preco` float NOT NULL,
+  `estoque` char(1) NOT NULL,
+  `cpfcnpj` char(18) NOT NULL,
+  `preco` int(11) NOT NULL,
   `categoria` varchar(45) NOT NULL,
   `arquivo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `produto`
+-- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produto` (`id`, `nomeproduto`, `descricao`, `estoque`, `fornecedor`, `cnpjfornecedor`, `preco`, `categoria`, `arquivo`) VALUES
-(4, 'Whey', 'Soro', 100, '', 2147483647, 100, 'Whey', 'img/produtos/075fa6577609812e11b0260a514fe93b.jpeg'),
-(5, 'Creatina', 'creat', 100, '', 545454544, 100, 'Creat', 'img/produtos/ddebefd7edafcee6c9d07cf15ce0932e.jpg');
+INSERT INTO `produtos` (`id`, `nomeproduto`, `descricao`, `estoque`, `cpfcnpj`, `preco`, `categoria`, `arquivo`) VALUES
+(4, 'Whey', 'Soro', '1', '2147483647', 100, 'Whey', 'img/produtos/075fa6577609812e11b0260a514fe93b.jpeg'),
+(6, 'glutamina', '222', '5', '11', 2222, 'Energia', 'img/produtos/6f3565eb6bb8e36c5e9992fa81e1f5c2.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `vendedor`
+--
+
+CREATE TABLE `vendedor` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telefone` char(16) NOT NULL,
+  `cpfcnpj` char(18) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `vendedor`
+--
+
+INSERT INTO `vendedor` (`id`, `nome`, `email`, `telefone`, `cpfcnpj`) VALUES
+(2, 'henrique', 'henrique@gmail.com', '(85) 4 4555-5555', '656.564.484-84');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `cliente`
+-- Índices de tabela `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`categoria`);
+
+--
+-- Índices de tabela `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `fornecedor`
+-- Índices de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `produto`
+-- Índices de tabela `pedidos`
 --
-ALTER TABLE `produto`
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id_pedidos`);
+
+--
+-- Índices de tabela `produtos`
+--
+ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- Índices de tabela `vendedor`
+--
+ALTER TABLE `vendedor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de tabela `produto`
+-- AUTO_INCREMENT de tabela `pedidos`
 --
-ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `pedidos`
+  MODIFY `id_pedidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `vendedor`
+--
+ALTER TABLE `vendedor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -42,7 +42,7 @@
 						<div class="row">
 							<div class="mb-3 col-4">
 								<label for="telefone" class="form-label">Telefone</label>
-								<input 
+								<input maxlength="14"
 								type="text" 
 								class="form-control"
 								name="telefone"
@@ -52,7 +52,7 @@
 				
 							<div class="mb-3 col-4">
 								<label for="cpfcnpj" class="form-label">CNPJ</label>
-								<input 
+								<input maxlength="18"
 								type="cpfcnpj" 
 								class="form-control"
 								name="cpfcnpj"
@@ -62,7 +62,7 @@
 
 							<div class="mb-3 col-4">
 								<label for="cep" class="form-label">CEP</label>
-								<input 
+								<input maxlength="9"
 								type="cep" 
 								class="form-control"
 								name="cep"
@@ -105,13 +105,13 @@
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
 				</form>
-
+					<br>
 				
 
 				
 			<div class="main">
 				<div
-					class="table-responsive"
+					class="table-responsive overflow-auto"
 				>
 					<table
 						class="table table-bordered"
@@ -155,8 +155,7 @@
 													type="button"
 													class="btn btn-warning btn-lg"
 													data-bs-toggle="modal"
-													data-bs-target="#modaleditar"
-													data-id="<?php echo $id ?>"
+													data-bs-target="#modaleditar_<?php echo $id ?>"
 												>
 												<i class="fa-solid fa-file-pen"></i></button>
 												
@@ -164,7 +163,7 @@
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 												<div
 													class="modal fade"
-													id="modaleditar"
+													id="modaleditar_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -179,7 +178,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Editar Cadastro Fornecedor 
+																	Editar Cadastro do Fornecedor 
 																	 <?php echo $nome ?>
 																</h5>
 																<button
@@ -192,7 +191,7 @@
 															<div class="modal-body">
 																<form action="atualizarFornecedor.php" method="POST">
                                                                     
-																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+																	<input type="hidden" name="id" value="<?php echo $id; ?>">
 																<div class="container-fluid p-0">
 
 					<h3 class="h3 mb-3">Dados do Fornecedor</h3>
@@ -223,7 +222,7 @@
 					<div class="row">
 						<div class="mb-3 col-12">
 							<label for="telefone" class="form-label">Telefone</label>
-							<input
+							<input maxlength="16"
 								type="text"
 								class="form-control"
 								name="telefone"
@@ -232,7 +231,7 @@
 						</div>
 						<div class="mb-3 col-12">
 							<label for="cpfcnpj" class="form-label">CNPJ</label>
-							<input
+							<input	maxlength="18"
 								type="text"
 								class="form-control"
 								name="cpfcnpj"
@@ -258,6 +257,7 @@
 						data-bs-dismiss="modal">
 						Voltar
 					</button>
+					<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<button type="submit" class="btn btn-primary">Salvar</button>
 				</form>
 				</div>
@@ -273,7 +273,7 @@
 	type="button"
 	class="btn btn-danger btn-lg"
 	data-bs-toggle="modal"
-	data-bs-target="#modalexcluir"
+	data-bs-target="#modalexcluir_<?php echo $id ?>"
 	>
 	<i class="fa-solid fa-trash-can"></i></button>
 	<!-- Modal Body -->
@@ -281,7 +281,7 @@
 	<form action="excluirFornecedor.php" method="POST">
 												<div
 													class="modal fade"
-													id="modalexcluir"
+													id="modalexcluir_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -312,7 +312,7 @@
 																	data-bs-dismiss="modal">
 																	Voltar
 																</button>
-																<input type="hidden" name="id" value="<?php echo $id; ?>">
+																<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 																<button type="submit" class="btn btn-danger">Excluir</button>
 															</div>
 														</div>
@@ -328,27 +328,6 @@
 														options,
 													);
 													
-													document.addEventListener('DOMContentLoaded', function() {
-														// Formata o CPF
-														const cpfInput = document.getElementById('cpf');
-														cpfInput.addEventListener('input', function (event) {
-            const cpf = event.target.value.replace(/\D/g, '');
-            let cpfFormatado = '';
-            if (cpf.length > 0) {
-				cpfFormatado = cpf.substring(0, 3);
-                if (cpf.length > 3) {
-					cpfFormatado += '.' + cpf.substring(3, 6);
-                    if (cpf.length > 6) {
-						cpfFormatado += '.' + cpf.substring(6, 9);
-                        if (cpf.length > 9) {
-							cpfFormatado += '-' + cpf.substring(9, 11);
-                        }
-                    }
-                }
-            }
-            event.target.value = cpfFormatado;
-        });
-    });
 	
 	</script>
 	</td>
@@ -372,6 +351,73 @@
 
 	<script src="js/app.js"></script>
 
+	<script>
+				// Formata o número de telefone
+const telefoneInput = document.getElementById('telefone');
+telefoneInput.addEventListener('input', function (event) {
+    const numero = event.target.value.replace(/\D/g, '');
+    let telefoneFormatado = '';
+    if (numero.length > 0) {
+        telefoneFormatado = '(' + numero.substring(0, 2) + ') ';
+        if (numero.length > 2) {
+            telefoneFormatado += numero.charAt(2) + ' ';
+            telefoneFormatado += numero.substring(3, 7);
+            if (numero.length > 7) {
+                telefoneFormatado += '-' + numero.substring(7, 11);
+            }
+        }
+    }
+    event.target.value = telefoneFormatado;
+});
+
+// Formata o CEP
+const cepInput = document.getElementById('cep');
+cepInput.addEventListener('input', function (event) {
+const cep = event.target.value.replace(/\D/g, '');
+let cepFormatado = '';
+if (cep.length > 0) {
+    cepFormatado = cep.substring(0, 5);
+    if (cep.length > 5) {
+        cepFormatado += '-' + cep.substring(5, 8);
+    }
+}
+event.target.value = cepFormatado;
+});
+
+// Formata o CPF ou CNPJ com base no tamanho do número inserido
+const cpfcnpjInput = document.getElementById('cpfcnpj');
+cpfcnpjInput.addEventListener('input', function (event) {
+    const numero = event.target.value.replace(/\D/g, '');
+    let numeroFormatado = '';
+    if (numero.length <= 11) { // CPF
+        numeroFormatado = numero.substring(0, 3);
+        if (numero.length > 3) {
+            numeroFormatado += '.' + numero.substring(3, 6);
+            if (numero.length > 6) {
+                numeroFormatado += '.' + numero.substring(6, 9);
+                if (numero.length > 9) {
+                    numeroFormatado += '-' + numero.substring(9, 11);
+                }
+            }
+        }
+    } else { // CNPJ
+        numeroFormatado = numero.substring(0, 2);
+        if (numero.length > 2) {
+            numeroFormatado += '.' + numero.substring(2, 5);
+            if (numero.length > 5) {
+                numeroFormatado += '.' + numero.substring(5, 8);
+                if (numero.length > 8) {
+                    numeroFormatado += '/' + numero.substring(8, 12);
+                    if (numero.length > 12) {
+                        numeroFormatado += '-' + numero.substring(12, 14);
+                    }
+                }
+            }
+        }
+    }
+    event.target.value = numeroFormatado;
+});
+</script>
 </body>
 
 </html>

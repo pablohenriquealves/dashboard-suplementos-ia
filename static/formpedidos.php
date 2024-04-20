@@ -11,65 +11,80 @@
 
         <div class="main">
             <?php include 'topo.php' ?>
-
+			
             <main class="content">
-            <div class="container">
-        <h2 class="mt-4 mb-4">Pedidos</h2>
-        
-        <div class="row">
-    <div class="col-md-6">
-        <h3>Novo Pedido</h3>
-        <form method="post" action="cadastropedidos.php">
-            <div class="form-group">
-                <label for="">Selecione o Cliente</label>
-				<select name="nomeCliente" id="nomeCliente">
-				<?php
+			<form action="cadastropedidos.php" method="post"  enctype="multipart/form-data">
+					<div class="container">
+
+						<h1 class="h3 mb-3">Novo Pedido</h1>
+
+						<div class="row">
+						<div class="form-group col-md-6">
+									<label for="">Selecione o Cliente</label>
+									<select class="form-select" name="nomeCliente" id="nomeCliente" aria-label="Default select example">
+										<option selected></option>
+										
+										<?php
                 require ('conexao.php');
                 $sql = "SELECT * FROM cliente";
                 $resultado = mysqli_query($conexao, $sql);
                 while ($row = mysqli_fetch_assoc($resultado)) {
-                    echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+					echo "<option value='{$row['id']}'>{$row['nome']}</option>";
                 }
-            ?>
+				?>	</select></div>
+							<div class="col-md-6">
+								<div class="form-group">
+							<label for="observacoes">Observações</label>
+								<textarea class="form-control"  rows="1" id="observacoes" name="observacoes"></textarea>
+							</div>
+							
+						</div>
 
 
 
 
-				</select>
+
+
+						<div class="row">
+						<div class="form-group col-md-6 mt-3">
+	                <label for="produto">Selecione o Produto</label>
+					<select class="form-select" name="nomeproduto" id="nomeproduto" aria-label="Default select example">
+										<option selected>Abrir seleção de produto</option>
+					<?php
+	                require ('conexao.php');
+	                $sql = "SELECT * FROM produtos";
+	                $resultado = mysqli_query($conexao, $sql);
+	                while ($row = mysqli_fetch_assoc($resultado)) {
+	                    echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
+	                }
+	            ?>
+					</select>
+				</div>
+		
+				<div class="form-group col-md-6 mt-3">
+						<label for="valor" class="ps-3">Valor Total</label>
+								<div class="input-group mb-3 ps-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">R$</span>
+				</div>
+				<input type="text" class="form-control"  id="valor" name="valor" aria-label="Quantia">
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
+				</div>
+				</div>
 
 			</div>
-            <div class="form-group">
-                <label for="produto">Selecione os Produtos</label>
-				<select name="produto" id="produto">
-				<?php
-                require ('conexao.php');
-                $sql = "SELECT * FROM produto";
-                $resultado = mysqli_query($conexao, $sql);
-                while ($row = mysqli_fetch_assoc($resultado)) {
-                    echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
-                }
-            ?>
-				</select>
+<!-- SEGUNDA ROW ACIMA  -->
+<br>
+<div><button type="submit" class="btn btn-primary">Enviar Pedido</button></div>			
+					</div>
+				</form><br>
 
-			</div>
-            <button type="submit" class="btn btn-primary">Enviar Pedido</button>
-        </form><br>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="observacoes">Observações</label>
-            <textarea class="form-control"  rows = "1"id="observacoes" name="observacoes"></textarea>
-        </div>
-        <div class="form-group">
-                <label for="valor">Valor dos Produtos</label>
-                <input type="number" class="form-control" id="valor" name="valor" step="0.01" required>
-            </div>
-    </div>
-</div>
                 
 <div class="main">
 				<div
-					class="table-responsive"
+					class="table-responsive overflow-auto"
 				>
 					<table
 						class="table table-bordered"
@@ -80,19 +95,22 @@
 								<th scope="col">Cliente</th>
 								<th scope="col">Produtos</th>
 								<th scope="col">Valor</th>
-								<th scope="col">Ações</th>
+								<th scope="col">AÇÕES</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php include 'conexao.php';
 
-							$sql = "SELECT * FROM pedidos";
-							$busca = mysqli_query($conexao, $sql);
+$sql = "SELECT p.id_pedidos, c.nome AS nomeCliente, p.produto, p.valor, pr.nomeproduto, pr.id
+FROM pedidos p
+INNER JOIN cliente c ON p.nomeCliente = c.id
+INNER JOIN produtos pr ON p.produto = pr.id";							
+$busca = mysqli_query($conexao, $sql);
 
 							while ($dados = mysqli_fetch_array($busca)){
-								$id = $dados['id'];
+								$id = $dados['id_pedidos'];
 								$nome = $dados['nomeCliente'];
-								$produto = $dados['produto'];
+								$produto = $dados['nomeproduto'];
 								$valor = $dados['valor'];
 						
 							?>
@@ -107,8 +125,7 @@
 													type="button"
 													class="btn btn-warning btn-lg"
 													data-bs-toggle="modal"
-													data-bs-target="#modaleditar"
-													data-id="<?php echo $id ?>"
+													data-bs-target="#modaleditar_<?php echo $id ?>"
 												>
 												<i class="fa-solid fa-file-pen"></i></button>
 												
@@ -116,7 +133,7 @@
 												<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 												<div
 													class="modal fade"
-													id="modaleditar"
+													id="modaleditar_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -144,14 +161,14 @@
 															<div class="modal-body">
 																<form action="atualizarPedidos.php" method="POST">
                                                                     
-																	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+																	<input type="hidden" name="id" value="<?php echo $id; ?>">
 																<div class="container-fluid p-0">
 
 					<h3 class="h3 mb-3">Dados do Pedido</h3>
 
 					<div class="row">
 						<div class="mb-3 col-12">
-							<label for="nome" class="form-label">Cliente</label>
+							<label for="nomeCliente" class="form-label">Cliente</label>
 							<select name="nomeCliente" id="nomeCliente">
 				<?php
                 require ('conexao.php');
@@ -172,7 +189,7 @@
 				<select name="produto" id="produto">
 				<?php
                 require ('conexao.php');
-                $sql = "SELECT * FROM produto";
+                $sql = "SELECT * FROM produtos";
                 $resultado = mysqli_query($conexao, $sql);
                 while ($row = mysqli_fetch_assoc($resultado)) {
                     echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
@@ -206,6 +223,7 @@
 						data-bs-dismiss="modal">
 						Voltar
 					</button>
+					<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<button type="submit" class="btn btn-primary">Salvar</button>
 				</form>
 				</div>
@@ -221,7 +239,7 @@
 	type="button"
 	class="btn btn-danger btn-lg"
 	data-bs-toggle="modal"
-	data-bs-target="#modalexcluir"
+	data-bs-target="#modalexcluir_<?php echo $id ?>"
 	>
 	<i class="fa-solid fa-trash-can"></i></button>
 	<!-- Modal Body -->
@@ -229,7 +247,7 @@
 	<form action="excluirPedidos.php" method="POST">
 												<div
 													class="modal fade"
-													id="modalexcluir"
+													id="modalexcluir_<?php echo $id ?>"
 													tabindex="-1"
 													data-bs-backdrop="static"
 													data-bs-keyboard="false"
@@ -243,7 +261,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Excluir dados do vendedor <?php echo $nome ?>
+																	Excluir pedido de <?php echo $nome ?>
 																</h5>
 																<button
 																	type="button"
@@ -252,7 +270,7 @@
 																	aria-label="Close"
 																></button>
 															</div>
-															<div class="modal-body">Deseja excluir todos os dados?</div>
+															<div class="modal-body">Deseja excluir o pedido?</div>
 															<div class="modal-footer">
 																<button
 																	type="button"
@@ -275,30 +293,7 @@
 														document.getElementById("modalId"),
 														options,
 													);
-													
-													document.addEventListener('DOMContentLoaded', function() {
-														// Formata o CPF
-														const cpfInput = document.getElementById('cpf');
-														cpfInput.addEventListener('input', function (event) {
-            const cpf = event.target.value.replace(/\D/g, '');
-            let cpfFormatado = '';
-            if (cpf.length > 0) {
-				cpfFormatado = cpf.substring(0, 3);
-                if (cpf.length > 3) {
-					cpfFormatado += '.' + cpf.substring(3, 6);
-                    if (cpf.length > 6) {
-						cpfFormatado += '.' + cpf.substring(6, 9);
-                        if (cpf.length > 9) {
-							cpfFormatado += '-' + cpf.substring(9, 11);
-                        }
-                    }
-                }
-            }
-            event.target.value = cpfFormatado;
-        });
-    });
-	
-	</script>
+													</script>
 	</td>
 								</tr>
 

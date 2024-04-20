@@ -1,7 +1,7 @@
 
 <?php 
 $nomeCliente = $_POST['nomeCliente'];
-$produto = $_POST['produto'];
+$produto = $_POST['nomeproduto'];
 $observacoes = $_POST['observacoes'];
 $valor = $_POST['valor'];
 

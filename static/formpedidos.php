@@ -82,7 +82,28 @@
 
 
 <br>
-<div><button type="submit" class="btn btn-primary">Enviar Pedido</button></div>			
+
+
+<div class="row">
+	<div class="form-group col-md-6 mt-5"><button type="submit" class="btn btn-primary">Enviar Pedido</button></div>	
+
+    <div class="form-group col-md-6 mt-3 ps-4">
+        <label for="produto">Selecione o Vendedor</label>
+        <select class="form-select" name="vendedor" id="vendedor" aria-label="Default select example" required>
+			<option selected>Abrir seleção de vendedores</option>
+            <?php
+            require('conexao.php');
+            $sql = "SELECT * FROM vendedor";
+            $resultado = mysqli_query($conexao, $sql);
+            while ($row = mysqli_fetch_assoc($resultado)) {
+				echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+            }
+            ?>
+        </select>
+    </div>
+	
+
+</div>
 					</div>
 				</form><br>
 
@@ -100,16 +121,18 @@
 								<th scope="col">Cliente</th>
 								<th scope="col">Produtos</th>
 								<th scope="col">Valor</th>
+								<th scope="col">Vendedor</th>
 								<th class="col-2" scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php include 'conexao.php';
 
-$sql = "SELECT p.id_pedidos, c.nome AS nomeCliente, p.produto, p.valor, pr.nomeproduto, pr.id
+$sql = "SELECT p.id_pedidos,p.vendedor,v.nome AS nomeVendedor, c.nome AS nomeCliente, p.produto, p.valor, pr.nomeproduto, pr.id
 FROM pedidos p
 INNER JOIN cliente c ON p.nomeCliente = c.id
-INNER JOIN produtos pr ON p.produto = pr.id";							
+INNER JOIN produtos pr ON p.produto = pr.id							
+INNER JOIN vendedor v ON p.vendedor = v.id";							
 $busca = mysqli_query($conexao, $sql);
 
 							while ($dados = mysqli_fetch_array($busca)){
@@ -117,6 +140,7 @@ $busca = mysqli_query($conexao, $sql);
 								$nome = $dados['nomeCliente'];
 								$produto = $dados['nomeproduto'];
 								$valor = $dados['valor'];
+								$vendedor = $dados['nomeVendedor'];
 						
 							?>
 
@@ -124,6 +148,7 @@ $busca = mysqli_query($conexao, $sql);
 									<td><?php echo $nome ?></td>
 									<td><?php echo $produto ?></td>
 									<td><?php echo $valor ?></td>
+									<td><?php echo $vendedor ?></td>
 									<td>
 												<!-- Modal trigger button -->
 												<button

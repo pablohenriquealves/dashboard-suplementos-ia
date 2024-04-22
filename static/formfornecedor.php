@@ -42,7 +42,7 @@
 						<div class="row">
 							<div class="mb-3 col-4">
 								<label for="telefone" class="form-label">Telefone</label>
-								<input maxlength="14"
+								<input maxlength="16"
 								type="text" 
 								class="form-control"
 								name="telefone"

@@ -66,7 +66,7 @@
 					
 					<div class="main">
 						<div
-					class="table-responsive overflow-auto"
+					class="overflow-auto"
 				>
 					<table
 						class="table table-bordered"

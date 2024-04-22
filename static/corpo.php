@@ -106,7 +106,7 @@
         </div>
 
         <div class="card-body py-3">
-                <div class="table-responsive overflow-auto">
+		<div class="overflow-auto" style="max-height: 300px;">
                     <table class="table">
                         <thead>
                             <tr class="text-center">
@@ -155,7 +155,7 @@
             <div class="card-header">
                 <h5 class="card-title mb-0">Últimos Produtos Cadastrados</h5>
             </div>
-            <div class="table-responsive overflow-auto">
+            <div class="overflow-auto" style="max-height: 350px;">
                 <table class="table">
                     <thead>
                         <tr class="text-center">
@@ -202,7 +202,7 @@
 								</div>
 								<div class="card-body d-flex w-100">
 									<div class="align-self-center chart chart-lg">
-										<div class="table-responsive overflow-auto">
+									<div class="overflow-auto" style="max-height: 350px;">
                 <table class="table">
                     <thead>
                         <tr class="text-center">

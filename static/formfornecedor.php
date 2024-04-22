@@ -111,8 +111,7 @@
 				
 			<div class="main">
 				<div
-					class="table-responsive overflow-auto"
-				>
+				class="overflow-auto" style="max-height: 600px;"				>
 					<table
 						class="table table-bordered"
 					>

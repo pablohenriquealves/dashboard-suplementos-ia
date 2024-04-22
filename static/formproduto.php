@@ -56,7 +56,7 @@
 									$sql = "SELECT * FROM fornecedor";
 									$resultado = mysqli_query($conexao, $sql);
 									while ($row = mysqli_fetch_assoc($resultado)) {
-										echo "<option value='{$row['id']}'>{$row['cpfcnpj']}</option>";
+										echo "<option value='{$row['id']}'>{$row['cpfcnpj']} - {$row['nome']}</option>";
 									}
 									?>
 									</select>
@@ -72,7 +72,7 @@
 						   
 							<div class="mb-3 col-6">
 								<label for="preco" class="form-label">Preço</label>
-								<input type="Integer" class="form-control" name="preco" id="preco" placeholder="Digite o Preço do Produto">
+								<input maxlength="6" type="Integer" class="form-control" name="preco" id="preco" placeholder="Digite o Preço do Produto" step="0.01">
 							</div>
 											
 						</div>

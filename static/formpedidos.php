@@ -42,40 +42,45 @@
 
 
 
-
-
-
 						<div class="row">
-						<div class="form-group col-md-6 mt-3">
-	                <label for="produto">Selecione o Produto</label>
-					<select class="form-select" name="nomeproduto" id="nomeproduto" aria-label="Default select example">
-										<option selected>Abrir seleção de produto</option>
-					<?php
-	                require ('conexao.php');
-	                $sql = "SELECT * FROM produtos";
-	                $resultado = mysqli_query($conexao, $sql);
-	                while ($row = mysqli_fetch_assoc($resultado)) {
-	                    echo "<option value='{$row['id']}'>{$row['nomeproduto']}</option>";
-	                }
-	            ?>
-					</select>
-				</div>
-		
-				<div class="form-group col-md-6 mt-3">
-						<label for="valor" class="ps-3">Valor Total</label>
-								<div class="input-group mb-3 ps-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">R$</span>
-				</div>
-				<input type="text" class="form-control"  id="valor" name="valor" aria-label="Quantia">
-				<div class="input-group-append">
-					<span class="input-group-text">.00</span>
-				</div>
-				</div>
-				</div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="produto">Selecione o Produto</label>
+        <select class="form-select" name="nomeproduto" id="nomeproduto" aria-label="Default select example" required>
+            <option selected>Abrir seleção de produtos</option>
+            <?php
+            require('conexao.php');
+            $sql = "SELECT * FROM produtos";
+            $resultado = mysqli_query($conexao, $sql);
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                echo "<option value='{$row['id']}' data-preco='{$row['preco']}'>{$row['nomeproduto']}</option>";
+            }
+            ?>
+        </select>
+    </div>
 
-			</div>
-<!-- SEGUNDA ROW ACIMA  -->
+    <div class="form-group col-md-6 mt-3">
+        <label for="valor" class="ps-3">Valor do Produto</label>
+        <div class="input-group mb-3 ps-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+            </div>
+            <input type="text" class="form-control" id="valor" name="valor" aria-label="Quantia" readonly>
+            <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('nomeproduto').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var preco = selectedOption.getAttribute('data-preco');
+        document.getElementById('valor').value = preco;
+    });
+</script>
+
+
 <br>
 <div><button type="submit" class="btn btn-primary">Enviar Pedido</button></div>			
 					</div>

@@ -95,7 +95,7 @@
 								<th scope="col">Cliente</th>
 								<th scope="col">Produtos</th>
 								<th scope="col">Valor</th>
-								<th scope="col">AÇÕES</th>
+								<th class="col-2" scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -21,7 +21,7 @@
 						<div class="row">
 							<div class="mb-3 col-6">
 								<label for="nomeproduto" class="form-label">Nome do Produto</label>
-								<input type="text" class="form-control" name="nomeproduto" id="nomeproduto" placeholder="Nome do produto">
+								<input type="text" class="form-control" name="nomeproduto" id="nomeproduto" placeholder="Nome do Produto">
 							</div>
 							<div class="mb-3 col-6">
 								<label for="categoria" class="form-label">Categoria</label>
@@ -43,7 +43,7 @@
 						<div class="row">
 							<div class="mb-3 col-6">
 								<label for="estoque" class="form-label">Quantidade em Estoque</label>
-								<input type="Integer" class="form-control" name="estoque" id="estoque"placeholder="Quantidade em estoque">
+								<input type="Integer" class="form-control" name="estoque" id="estoque"placeholder="Quantidade em Estoque">
 							</div>
 							
 							<div class="mb-3 col-6">
@@ -67,12 +67,12 @@
 						<div class="row">
 						<div class="mb-3 col-6">
 								<label for="descricao" class="form-label">Descrição</label>
-								<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição do produto">
+								<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição do Produto">
 							</div>
 						   
 							<div class="mb-3 col-6">
 								<label for="preco" class="form-label">Preço</label>
-								<input type="Integer" class="form-control" name="preco" id="preco" placeholder="Digite o preco do produto">
+								<input type="Integer" class="form-control" name="preco" id="preco" placeholder="Digite o Preço do Produto">
 							</div>
 											
 						</div>
@@ -83,9 +83,9 @@
 								class="form-control"
 								name="imagem"
 								id="imagem"
-								placeholder="Insira a imagem do produto"/>
+								placeholder="Insira a Imagem do Produto"/>
 						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
+						<button type="submit" class="btn btn-primary">Cadastrar</button>
 					</div>
 				</form>
 				<script>
@@ -142,7 +142,7 @@
 								<th scope="col">Preço</th>
 								<th scope="col">Estoque</th>
 								<th scope="col">Categoria</th>
-								<th scope="col">AÇÕES</th>
+								<th class="col-2" scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>

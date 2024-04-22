@@ -26,7 +26,7 @@
 								class="form-control"
 								name="nome"
 								id="nome"
-								placeholder="Nome do cliente">
+								placeholder="Nome do Cliente">
 							</div>
 				
 							<div class="mb-3 col-6">
@@ -47,7 +47,7 @@
 								class="form-control"
 								name="telefone"
 								id="telefone"
-								placeholder="(99) 9 9999-9999">
+								placeholder="(85) 9 9999-9999">
 							</div>
 				
 							<div class="mb-3 col-4">
@@ -57,7 +57,7 @@
 								class="form-control"
 								name="cpfcnpj"
 								id="cpfcnpj"
-								placeholder="CPF do cliente"/>
+								placeholder="CPF do Cliente"/>
 							</div>
 
 							<div class="mb-3 col-4">
@@ -67,7 +67,7 @@
 								class="form-control"
 								name="cep"
 								id="cep"
-								placeholder="CEP"/>
+								placeholder="Insira o CEP"/>
 							</div>
 						</div>
 
@@ -79,7 +79,7 @@
 								class="form-control"
 								name="logradouro"
 								id="logradouro"
-								placeholder="Endereço do cliente">
+								placeholder="Endereço do Cliente">
 							</div>
 				
 							<div class="mb-3 col-4">
@@ -104,7 +104,7 @@
 							
 						</div>
 						<div class="mb-3 col-4">
-							<label for="imagem" class="form-label">Logo/Imagem pessoal</label>
+							<label for="imagem" class="form-label">Logo/Imagem Pessoal</label>
 							<input
 								type="file"
 								class="form-control"
@@ -126,11 +126,11 @@
 							<tr class="text-center">
 							<th scope="col">Foto</th>
 								<th scope="col">Nome do cliente</th>
-								<th scope="col">Email</th>
+								<th scope="col">E-mail</th>
 								<th scope="col">Telefone</th>
 								<th scope="col">CPF / CNPJ</th>
 								<th scope="col">CEP</th>
-								<th scope="col">Editar</th>
+								<th scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -186,7 +186,7 @@
 														<div class="modal-content">
 															<div class="modal-header">
 																<h5 class="modal-title" id="modalTitleId">
-																	Editar cadastro do Cliente 
+																	Editar cadastro do cliente 
 																	 <?php echo $nome ?>
 																</h5>
 																<button
@@ -207,7 +207,7 @@
 					<div class="row">
 						<div class="mb-3 col-12">
 							<label for="nome" class="form-label">Nome</label>
-							<input
+							<input maxlength="100"
 								type="text"
 								class="form-control"
 								name="nome"
@@ -216,7 +216,7 @@
 						</div>
 						<div class="mb-3 col-12">
 							<label for="email" class="form-label">E-mail</label>
-							<input
+							<input	maxlength="100"
 								type="email"
 								class="form-control"
 								name="email"
@@ -230,7 +230,7 @@
 					<div class="row">
 						<div class="mb-3 col-12">
 							<label for="telefone" class="form-label">Telefone</label>
-							<input maxlength="15"
+							<input minlength="11" maxlength="11"
 								type="text"
 								class="form-control"
 								name="telefone"
@@ -239,7 +239,7 @@
 						</div>
 						<div class="mb-3 col-12">
 							<label for="cpfcnpj" class="form-label">CPF</label>
-							<input	maxlength="18"
+							<input	minlength="11" maxlength="14"
 								type="text"
 								class="form-control"
 								name="cpfcnpj"
@@ -248,7 +248,7 @@
 						</div>
 						<div class="mb-3 col-12">
 							<label for="cep" class="form-label">CEP</label>
-							<input 	maxlength="9"
+							<input  minlength="8"	maxlength="8"
 								type="text"
 								class="form-control"
 								name="cep"

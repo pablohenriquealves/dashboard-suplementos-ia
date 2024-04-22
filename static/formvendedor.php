@@ -27,7 +27,7 @@
                                     class="form-control"
                                     name="nome"
                                     id="nome"
-                                    placeholder="Nome do vendedor" required>
+                                    placeholder="Nome do Vendedor" required>
                             </div>
                 
                             <div class="mb-3 col-6">
@@ -48,7 +48,7 @@
                                     class="form-control"
                                     name="telefone"
                                     id="telefone"
-                                    placeholder="(99) 9 9999-9999" required>
+                                    placeholder="(85) 9 9999-9999" required>
                             </div>
                 
                             <div class="mb-3 col-4">
@@ -75,7 +75,7 @@
                         <tr><th colspan="7" style="text-align: center;">Vendedores Cadastrados</th></tr>
 							<tr class="text-center">
 								<th scope="col">Nome</th>
-								<th scope="col">Email</th>
+								<th scope="col">E-mail</th>
 								<th scope="col">Telefone</th>
 								<th scope="col">CPF</th>
 								<th scope="col">Ações</th>

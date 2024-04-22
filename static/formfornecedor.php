@@ -26,7 +26,7 @@
 								class="form-control"
 								name="nome"
 								id="nome"
-								placeholder="Nome do cliente">
+								placeholder="Nome do Fornecedor">
 							</div>
 				
 							<div class="mb-3 col-6">
@@ -47,7 +47,7 @@
 								class="form-control"
 								name="telefone"
 								id="telefone"
-								placeholder="(99) 9 9999-9999">
+								placeholder="(85) 9 9999-9999">
 							</div>
 				
 							<div class="mb-3 col-4">
@@ -57,7 +57,7 @@
 								class="form-control"
 								name="cpfcnpj"
 								id="cpfcnpj"
-								placeholder="CNPJ do fornecedor"/>
+								placeholder="CNPJ do Fornecedor"/>
 							</div>
 
 							<div class="mb-3 col-4">
@@ -67,7 +67,7 @@
 								class="form-control"
 								name="cep"
 								id="cep"
-								placeholder="CEP"/>
+								placeholder="Insira o CEP"/>
 							</div>
 						</div>
 
@@ -79,7 +79,7 @@
 								class="form-control"
 								name="logradouro"
 								id="logradouro"
-								placeholder="Endereço do cliente">
+								placeholder="Endereço do Fornecedor">
 							</div>
 				
 							<div class="mb-3 col-4">
@@ -99,10 +99,10 @@
 								class="form-control"
 								name="complemento"
 								id="complemento"
-								placeholder="Complemento"/>
+								placeholder=""/>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
+						<button type="submit" class="btn btn-primary">Cadastrar</button>
 					</div>
 				</form>
 					<br>
@@ -124,7 +124,7 @@
 								<th scope="col">Telefone</th>
 								<th scope="col">CNPJ</th>
 								<th scope="col">CEP</th>
-								<th scope="col">AÇÕES</th>
+								<th scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>

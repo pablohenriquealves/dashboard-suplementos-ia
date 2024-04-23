@@ -3,7 +3,7 @@
 
 </head>
 
-	<nav id="sidebar" class="sidebar js-sidebar">
+	<nav id="sidebar" class="sidebar js-sidebar bg-danger">
 		<!--bg-danger altera cor da sidebar na div abaixo-->
 				<div class="sidebar-content js-simplebar bg-danger">
 					<a style="text-decoration: none;" class="sidebar-brand  bg-danger" href="index.php">

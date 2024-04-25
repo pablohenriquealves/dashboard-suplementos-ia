@@ -144,8 +144,10 @@
                 </div>
 			</div>
 			<div class="card-footer mt-auto">
-			<button class="btn btn-primary w-100" type="button"><a href="formpedidos.php" style="text-decoration: none; color: white;">Ver todas as vendas</a></button>
-			</div>
+    <a href="formpedidos.php" style="text-decoration: none; color: white; display: block;">
+        <button class="btn btn-primary w-100" type="button">Ver todas as vendas</button>
+    </a>
+</div>
 		</div>
 </div>
 
@@ -190,9 +192,11 @@
                 </table>
 
             </div>
-            <div class="card-footer mt-auto">
-                <button type="button" class="btn btn-primary w-100"><a href="formproduto.php" style="text-decoration: none; color: white;">Ver todos os produtos</a></button>
-            </div>
+			<div class="card-footer mt-auto">
+    <a href="formproduto.php" style="text-decoration: none; color: white; display: block;">
+        <button class="btn btn-primary w-100" type="button">Ver todos os produtos</button>
+    </a>
+</div>
         </div>
     </div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">

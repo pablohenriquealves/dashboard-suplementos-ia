@@ -1,4 +1,5 @@
-<?php 
+<?php
+// Obtém os dados do formulário
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
@@ -8,22 +9,37 @@ require('conexao.php');
 
 // Verifica se todos os campos foram preenchidos
 if (!empty($nome) && !empty($email) && !empty($telefone) && !empty($cpf)) {
-    // Prepara a query SQL para inserir os dados na tabela de vendedores
-    $sql = "INSERT INTO vendedor (nome, email, telefone, cpfcnpj) VALUES ('$nome', '$email', '$telefone', '$cpf')";
+    // Prepara a query SQL com prepared statement
+    $sql = "INSERT INTO vendedor (nome, email, telefone, cpfcnpj) VALUES (?, ?, ?, ?)";
 
-    // Executa a query
-    if (mysqli_query($conexao, $sql)) {
-        echo "Vendedor cadastrado com sucesso";
+    $stmt = $conexao->prepare($sql);
+
+    if ($stmt) {
+        // Liga os parâmetros à declaração preparada
+        $stmt->bind_param("ssss", $nome, $email, $telefone, $cpf); // "ssss" indica que são quatro strings
+
+        // Executa a declaração preparada
+        if ($stmt->execute()) {
+            // Mensagem de sucesso pode ser descomentada se necessário
+            // echo "Vendedor cadastrado com sucesso";
+        } else {
+            echo "Erro ao cadastrar o vendedor: " . $stmt->error;
+        }
+
+        // Fecha a declaração preparada
+        $stmt->close();
     } else {
-        echo "Erro ao cadastrar o vendedor: " . mysqli_error($conexao);
+        echo "Erro na preparação da consulta: " . $conexao->error;
     }
 } else {
-    echo "Todos os campos s茫o obrigat贸rios.";
+    echo "Todos os campos são obrigatórios.";
 }
 
-// Fecha a conex茫o
-mysqli_close($conexao);
-
-// Redireciona de volta para o formul谩rio
-header("Location: formvendedor.php");
+// Fecha a conexão com o banco de dados
+$conexao->close();
 ?>
+
+<script>
+    // Redireciona após o cadastro bem-sucedido
+    document.location = 'formvendedor.php';
+</script>

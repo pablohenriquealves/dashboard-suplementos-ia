@@ -1,4 +1,5 @@
-<?php 
+<?php
+// Recebendo os dados do formulário
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
@@ -7,24 +8,40 @@ $id = $_POST['id'];
 
 require('conexao.php');
 
-// Verifica se todos os campos foram preenchidos
+// Verifica se todos os campos obrigatórios estão preenchidos
 if (!empty($nome) && !empty($email) && !empty($telefone) && !empty($cpf)) {
-    // Prepara a query SQL para inserir os dados na tabela de vendedores
-    $sql = "UPDATE vendedor SET nome='$nome', email='$email', telefone='$telefone', cpfcnpj='$cpf' WHERE id='$id'";
 
-    // Executa a query
-    if (mysqli_query($conexao, $sql)) {
-        echo "Vendedor alterado com sucesso";
+    // Prepara a query SQL com prepared statement para atualizar os dados
+    $sql = "UPDATE vendedor SET nome=?, email=?, telefone=?, cpfcnpj=? WHERE id=?";
+
+    // Inicia a declaração preparada
+    $stmt = $conexao->prepare($sql);
+
+    if ($stmt) {
+        // Liga os parâmetros à declaração preparada
+        $stmt->bind_param("ssssi", $nome, $email, $telefone, $cpf, $id); // "ssssi" indica tipos de dados (strings e inteiro)
+
+        // Executa a declaração preparada
+        if ($stmt->execute()) {
+            echo "Vendedor alterado com sucesso";
+        } else {
+            echo "Erro ao alterar cadastro do vendedor: " . $stmt->error;
+        }
+
+        // Fecha a declaração preparada
+        $stmt->close();
     } else {
-        echo "Erro ao alterar cadastro do vendedor: " . mysqli_error($conexao);
+        echo "Erro na preparação da consulta: " . $conexao->error;
     }
 } else {
-    echo "Todos os campos s茫o obrigat贸rios.";
+    echo "Todos os campos são obrigatórios.";
 }
 
-// Fecha a conex茫o
-mysqli_close($conexao);
-
-// Redireciona de volta para o formul谩rio
-header("Location: formvendedor.php");
+// Fecha a conexão com o banco de dados
+$conexao->close();
 ?>
+
+<script>
+    // Redireciona após a atualização bem-sucedida
+    document.location = 'formvendedor.php';
+</script>

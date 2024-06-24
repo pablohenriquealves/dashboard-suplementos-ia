@@ -1,4 +1,5 @@
-<?php 
+<?php
+// Recebendo os dados do formulário
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
@@ -7,20 +8,44 @@ $cep = $_POST['cep'];
 $logradouro = $_POST['logradouro'];
 $numero = $_POST['numero'];
 $complemento = $_POST['complemento'];
+$id_fornecedor = $_POST['id'];
 
 require('conexao.php');
 
-// Supondo que você tenha um campo para identificar o fornecedor que será atualizado, chamado de 'id_fornecedor'
-$id_fornecedor = $_POST['id'];
+// Verifica se todos os campos obrigatórios estão preenchidos (opcional)
+if (!empty($nome) && !empty($email) && !empty($telefone) && !empty($cpfcnpj) && !empty($cep) && !empty($logradouro) && !empty($numero)) {
 
-$sql = "UPDATE fornecedor SET nome='$nome', email='$email', telefone='$telefone', cpfcnpj='$cpfcnpj', cep='$cep', logradouro='$logradouro', numero='$numero', complemento='$complemento' WHERE id='$id_fornecedor'";
+    // Prepara a query SQL com prepared statement para atualizar os dados
+    $sql = "UPDATE fornecedor SET nome=?, email=?, telefone=?, cpfcnpj=?, cep=?, logradouro=?, numero=?, complemento=? WHERE id=?";
 
-if(mysqli_query($conexao, $sql)){
-    echo "Registro atualizado com sucesso";
+    // Inicia a declaração preparada
+    $stmt = $conexao->prepare($sql);
+
+    if ($stmt) {
+        // Liga os parâmetros à declaração preparada
+        $stmt->bind_param("ssssssssi", $nome, $email, $telefone, $cpfcnpj, $cep, $logradouro, $numero, $complemento, $id_fornecedor); // "ssssssssi" indica tipos de dados (strings e inteiro)
+
+        // Executa a declaração preparada
+        if ($stmt->execute()) {
+            echo "Registro atualizado com sucesso";
+        } else {
+            echo "Erro ao atualizar o fornecedor: " . $stmt->error;
+        }
+
+        // Fecha a declaração preparada
+        $stmt->close();
+    } else {
+        echo "Erro na preparação da consulta: " . $conexao->error;
+    }
 } else {
-    echo "Erro ao atualizar o fornecedor: " . mysqli_error($conexao);
+    echo "Todos os campos são obrigatórios.";
 }
 
-mysqli_close($conexao);
-header("location:formfornecedor.php");
+// Fecha a conexão com o banco de dados
+$conexao->close();
 ?>
+
+<script>
+    // Redireciona após o cadastro bem-sucedido
+    document.location = 'formfornecedor.php';
+</script>

@@ -1,16 +1,40 @@
-<?php 
+<?php
 require('conexao.php');
 
-$id_produto = $_POST['id'];
+// Verifica se o ID do produto foi enviado via POST
+if (isset($_POST['id'])) {
+    $id_produto = $_POST['id'];
 
-$sql = "DELETE FROM produtos WHERE id='$id_produto'";
+    // Preparar a query SQL utilizando prepared statement
+    $sql = "DELETE FROM produtos WHERE id = ?";
 
-if(mysqli_query($conexao, $sql)){
-    echo "Registro exclu铆do com sucesso";
+    $stmt = $conexao->prepare($sql);
+
+    if ($stmt) {
+        // Liga os parâmetros à declaração preparada
+        $stmt->bind_param("i", $id_produto); // "i" indica que $id_produto é um inteiro
+
+        // Executa a declaração preparada
+        if ($stmt->execute()) {
+            echo "Registro excluído com sucesso";
+        } else {
+            echo "Erro ao excluir o produto: " . $stmt->error;
+        }
+
+        // Fecha a declaração preparada
+        $stmt->close();
+    } else {
+        echo "Erro na preparação da consulta: " . $conexao->error;
+    }
 } else {
-    echo "Erro ao excluir o produto: " . mysqli_error($conexao);
+    echo "ID do produto não foi fornecido";
 }
 
-mysqli_close($conexao);
-header("location:formproduto.php");
+// Fecha a conexão com o banco de dados
+$conexao->close();
 ?>
+
+<script>
+    // Redireciona ap贸s o cadastro bem-sucedido
+    document.location = 'formproduto.php';
+</script>

@@ -1,24 +1,40 @@
-<?php 
+<?php
 $nome = $_POST['nome'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
 $cpf = $_POST['cpfcnpj'];
 $id = $_POST['id'];
+
+// Incluir o arquivo de conexão
 require('conexao.php');
 
+// Preparar a query SQL utilizando prepared statement
+$sql = "DELETE FROM vendedor WHERE id = ?";
 
-    $sql = "DELETE FROM vendedor WHERE id='$id'";
+$stmt = $conexao->prepare($sql);
 
-    // Executa a query
-    if (mysqli_query($conexao, $sql)) {
-        echo "Vendedor alterado com sucesso";
+if ($stmt) {
+    // Liga os parâmetros à declaração preparada
+    $stmt->bind_param("i", $id); // "i" indica que $id é um inteiro
+
+    // Executa a declaração preparada
+    if ($stmt->execute()) {
+        echo "Vendedor deletado com sucesso";
     } else {
-        echo "Erro ao alterar cadastro do vendedor: " . mysqli_error($conexao);
+        echo "Erro ao deletar vendedor: " . $stmt->error;
     }
 
-// Fecha a conex茫o
-mysqli_close($conexao);
+    // Fecha a declaração preparada
+    $stmt->close();
+} else {
+    echo "Erro na preparação da consulta: " . $conexao->error;
+}
 
-// Redireciona de volta para o formul谩rio
-header("Location: formvendedor.php");
+// Fecha a conexão com o banco de dados
+$conexao->close();
 ?>
+
+<script>
+    // Redireciona ap贸s o cadastro bem-sucedido
+    document.location = 'formvendedor.php';
+</script>
